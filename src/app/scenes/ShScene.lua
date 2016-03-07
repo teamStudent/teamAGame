@@ -21,9 +21,11 @@ function ShScene:init()
 	-- 		print("bsz")
 	-- 	end
 	-- end
-	-- local map=Shnumber.."-".."map"..".tmx"
-	-- self.tiledMap=cc.TMXTiledMap:create(map)
-	-- self.tiledMap:addTo(self)
+
+	local map1="map/"..Shnumber.."-".."map"..".tmx"
+	self.tiledMap=cc.TMXTiledMap:create(map1)
+	self.tiledMap:addTo(self)
+	 self.layer=self.tiledMap:getLayer("layer1")
 
 
 

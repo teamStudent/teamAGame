@@ -1,2 +1,3 @@
 # teamAGame
-Author:zilong Tang
+Author: Echo
+

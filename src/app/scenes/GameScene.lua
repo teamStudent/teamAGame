@@ -33,6 +33,8 @@ function GameScene:init()
  
 
   local path="map/game"..sceneNum.."-"..chapterNum..".tmx"
+    self.step=20     --步数
+    self.isshuaxinguaiwu=0     --是否已经开始刷新怪物
     self.monsterNum=0     --怪物数
     self.number=1    --波数
     self.killEnermyNum=0  --杀敌数
@@ -132,8 +134,8 @@ function GameScene:init()
   --子弹
   self.bullet={}
   --时间调度，开始出怪
-  self:createOneEnermy()
-  self:createEnermy()
+  --self:createOneEnermy()
+  --self:createEnermy()
   --初始化道具
   self:testTouch()
   -- 时间调度，怪进入塔的攻击范围之内，开始攻击
@@ -345,8 +347,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid<=0 then
+            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid>0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -408,8 +410,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid<=0 then
+            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid>0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -469,8 +471,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid<=0 then
+            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid>0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -530,8 +532,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid<=0 then
+            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid>0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -590,8 +592,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid<=0 then
+            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid>0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -625,7 +627,7 @@ function GameScene:testTouch()
     -- local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
     local x= self.beginPoint.x/64
     local y = (640-self.beginPoint.y)/64
-    self.layer:setTileGID(97,cc.p(math.floor(x),math.floor(y)))
+    --self.layer:setTileGID(83,cc.p(math.floor(x),math.floor(y)))
     
 
     zhujue:setTouchEnabled(true)
@@ -637,13 +639,36 @@ function GameScene:testTouch()
           local x= event.x/64
           local y = (640-event.y)/64
           local tileGid=self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-          if tileGid<=0 
+          if self.step==0 then
+            --todo
+            --时间调度，开始出怪
+            if self.isshuaxinguaiwu==0 then
+              --todo
+             self:createOneEnermy()
+             self:createEnermy()
+             self.isshuaxinguaiwu=1
+            end
+            return
+          
+          elseif tileGid==0 
             and math.abs(event.x-zhujue:getPositionX())<=64
-            and math.abs(event.y-zhujue:getPositionY())<=64
+            and math.abs(event.y-zhujue:getPositionY())<32
+            
              then
             --todo
             zhujue:setPosition(math.floor(x)*64+32,(10-math.floor(y))*64-32)
-            self.layer:setTileGID(97,cc.p(math.floor(x),math.floor(y)))
+            self.layer:setTileGID(83,cc.p(math.floor(x),math.floor(y)))
+            self.step=self.step-1
+          
+          elseif tileGid==0 
+            and math.abs(event.x-zhujue:getPositionX())<32
+            and math.abs(event.y-zhujue:getPositionY())<=64
+            
+             then
+            --todo
+            zhujue:setPosition(math.floor(x)*64+32,(10-math.floor(y))*64-32)
+            self.layer:setTileGID(116,cc.p(math.floor(x),math.floor(y)))
+            self.step=self.step-1
           end
         elseif event.name=="ended" then
             

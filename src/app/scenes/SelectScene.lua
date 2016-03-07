@@ -29,6 +29,19 @@ function SelectScene:init()
 	backBtn:pos(display.left+50, display.top-50)
 	self:addChild(backBtn, 1)
 
+	local enter = cc.ui.UIPushButton.new({normal="SelectScene/fb1.png",pressed="SelectScene/fb1.png"},{scale9=true})
+	    :onButtonClicked(function()
+		print("caonima")
+		local chooseLayer = ChooseLayer.new()
+		chooseLayer:setPosition(cc.p(0,0))
+		self:addChild(chooseLayer,13)
+		print("cao")
+		end)
+	   :setPosition(cc.p(display.width-50,display.height-50))
+	   :setScale(0.5)
+	   :addTo(self)
+
+
 	
 	local item1 = cc.ui.UIPushButton.new({normal="SelectScene/wei.png",pressed="SelectScene/wei.png"},{scale9=true})
 	           :onButtonClicked(function()

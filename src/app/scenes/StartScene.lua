@@ -16,10 +16,7 @@ function StartScene:init()
 	local scaleY = display.height/bg:getContentSize().height
 	bg:setScale(scaleX,scaleY)
 	bg:setPosition(cc.p(display.cx,display.cy))
-	self:addChild(bg)
-
-
-    
+	self:addChild(bg) 
 	self._startButton = cc.ui.UIPushButton.new({normal="StartScene/play.png"},{scale9=true})
 	                   :onButtonClicked(function(event)
                    	   display.replaceScene(SelectScene.new())
@@ -27,6 +24,14 @@ function StartScene:init()
                        :pos(display.cx, display.cy-30)
                        :addTo(self)
                        :setScale(1.5)
+
+    self._awardButton = cc.ui.UIPushButton.new({normal="StartScene/award1.png",pressed="StartScene/award2.png"},{scale9=true})
+     					:onButtonClicked(function(event)
+     					display.replaceScene(AwardScene.new(),"pageTurn",1.2)
+     					end)
+     					:pos(display.cx-10, display.cy-100)
+     					:addTo(self)
+     					:setScale(0.9)	
                        
 
 	

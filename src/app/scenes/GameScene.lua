@@ -554,6 +554,7 @@ function GameScene:testTouch()
         
     end)
 
+
     local money5 = display.newSprite("GameScene/money.png")
     money5:pos(self.wuqi5Point.x-4, display.bottom+3)
     money5:setScale(0.4)
@@ -612,8 +613,43 @@ function GameScene:testTouch()
         end
         
     end)
-
     
+
+    local zhujue=display.newSprite("enermy/enermy6.png")
+    self.beginPoint= self.hero:getObject("begin")
+    zhujue:pos(self.beginPoint.x, self.beginPoint.y)
+    zhujue:addTo(self.tileMap,2)
+
+    -- local x= event.x/64
+    -- local y = (640-event.y)/64
+    -- local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+    local x= self.beginPoint.x/64
+    local y = (640-self.beginPoint.y)/64
+    self.layer:setTileGID(97,cc.p(math.floor(x),math.floor(y)))
+    
+
+    zhujue:setTouchEnabled(true)
+    zhujue:setTouchSwallowEnabled(false)
+    zhujue:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)
+       if event.name=="began" then
+            return true
+        elseif event.name=="moved" then
+          local x= event.x/64
+          local y = (640-event.y)/64
+          local tileGid=self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+          if tileGid<=0 
+            and math.abs(event.x-zhujue:getPositionX())<=64
+            and math.abs(event.y-zhujue:getPositionY())<=64
+             then
+            --todo
+            zhujue:setPosition(math.floor(x)*64+32,(10-math.floor(y))*64-32)
+            self.layer:setTileGID(97,cc.p(math.floor(x),math.floor(y)))
+          end
+        elseif event.name=="ended" then
+            
+        end
+        
+    end)
 end
 
 function GameScene:attack(v1,v)

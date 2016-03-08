@@ -18,6 +18,10 @@ function StartScene:init()
 	bg:setPosition(cc.p(display.cx,display.cy))
 	self:addChild(bg)
 
+	-- local bb = Enermy:new()
+	-- bb:setPosition(100,100)
+	-- self:addChild(bb, 3)
+
 
     
 	self._startButton = cc.ui.UIPushButton.new({normal="StartScene/play.png"},{scale9=true})
@@ -27,6 +31,15 @@ function StartScene:init()
                        :pos(display.cx, display.cy-30)
                        :addTo(self)
                        :setScale(1.5)
+
+    --成就按钮
+    self._startButton = cc.ui.UIPushButton.new({normal="chengJiu.jpg"},{scale9=true})
+	                   :onButtonClicked(function(event)
+                   	   display.replaceScene(AchieveScene.new())
+                       end)
+                       :pos(display.cx, display.cy-90)
+                       :addTo(self)
+                       -- :setScale(1.5)
                        
 
 	

@@ -39,7 +39,7 @@ function GameScene:init()
     self.monsterNum=0     --怪物数
     self.number=1    --波数
     self.killEnermyNum=0  --杀敌数
-    self.hp=1000   
+    self.hp=10   
        --血量
     self.isWin=false
     self.tileMap =cc.TMXTiledMap:create(path)
@@ -1100,7 +1100,7 @@ function GameScene:createEnermy()
     -- end
 
   end
-   self.handle1= scheduler.scheduleGlobal(createE,1)
+   self.handle1= scheduler.scheduleGlobal(createE,15)
 
 
    

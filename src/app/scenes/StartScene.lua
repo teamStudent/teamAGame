@@ -16,7 +16,14 @@ function StartScene:init()
 	local scaleY = display.height/bg:getContentSize().height
 	bg:setScale(scaleX,scaleY)
 	bg:setPosition(cc.p(display.cx,display.cy))
-	self:addChild(bg) 
+	self:addChild(bg)
+
+	-- local bb = Enermy:new()
+	-- bb:setPosition(100,100)
+	-- self:addChild(bb, 3)
+
+
+    
 	self._startButton = cc.ui.UIPushButton.new({normal="StartScene/play.png"},{scale9=true})
 	                   :onButtonClicked(function(event)
                    	   display.replaceScene(SelectScene.new())
@@ -29,9 +36,18 @@ function StartScene:init()
      					:onButtonClicked(function(event)
      					display.replaceScene(AwardScene.new(),"pageTurn",1.2)
      					end)
-     					:pos(display.cx-10, display.cy-100)
+     					:pos(display.cx-10, display.cy-140)
      					:addTo(self)
-     					:setScale(0.9)	
+     					:setScale(0.9)
+
+    --成就按钮
+    self._startButton = cc.ui.UIPushButton.new({normal="chengJiu.jpg"},{scale9=true})
+	                   :onButtonClicked(function(event)
+                   	   display.replaceScene(AchieveScene.new())
+                       end)
+                       :pos(display.cx, display.cy-90)
+                       :addTo(self)
+                       -- :setScale(1.5)
                        
 
 	

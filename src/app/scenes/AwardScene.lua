@@ -26,15 +26,22 @@ function AwardScene:init()
 	backBtn:pos(display.left+50, display.top-50)
 	self:addChild(backBtn, 1)
 
+	local baoxiang = cc.ui.UIPushButton.new({normal="AwardScene/baoxiang1.png",pressed="AwardScene/baoxiang2.png"},{scale9=true})
+	baoxiang:onButtonClicked(function(event)
+		
+	end)
+	baoxiang:pos(display.cx, display.cy+75)
+	self:addChild(baoxiang, 1)
+
 	math.randomseed(os.time())
 
 	for i=1,5 do
 	
 	local back = display.newSprite("AwardScene/back.png")
-	back:pos(display.cx-300, display.cy-150)
+	back:pos(display.cx-300+150*(i-1), display.cy-150)
 	self:add(back)
 
-	local front = display.newSprite("AwardScene/kapai"..math.random(1,6)..".png")
+	local front = display.newSprite("AwardScene/kapai"..math.random(1,5)..".png")
 	front:pos(display.cx-300+150*(i-1), display.cy-150)
 	front:setVisible(false)
 	self:add(front)

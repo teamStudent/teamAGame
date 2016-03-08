@@ -3,8 +3,8 @@
  <tileset firstgid="1" name="jlMap" tilewidth="960" tileheight="640">
   <image source="jlMap.png" width="960" height="640"/>
  </tileset>
- <tileset firstgid="2" name="show" tilewidth="64" tileheight="64">
-  <image source="show.png" width="64" height="64"/>
+ <tileset firstgid="2" name="map" tilewidth="64" tileheight="64">
+  <image source="map.png" width="512" height="512"/>
  </tileset>
  <layer name="layer1" width="15" height="10">
   <data encoding="base64" compression="zlib">
@@ -29,7 +29,7 @@
  </objectgroup>
  <layer name="showLayer1" width="15" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYMAETFgwsYAUtbj0ottJjJnoaphwiFOql9iwoUY4ELKXEjuw2Uct80AAAFNQAD8=
+   eJxjYMAEJlgwsYAUtbj0kmonNr0maOLE6MVmFja1xIQNNcKBkL2U2IHNPnLMw6UHAIbABrU=
   </data>
  </layer>
 </map>

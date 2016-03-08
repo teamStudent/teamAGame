@@ -64,24 +64,25 @@ function SelectChapter:init()
 	for i=1,6 do
 		local item1
 		if tb[1][i].lock==0 then
-			item1=cc.ui.UIPushButton.new({normal=Data.getChapterBtnData(i).pic},{scale9=true})
-			item1:onButtonClicked(function ()
-			ModifyData.setChapterNumber(i)
-			local scene=GameScene.new()
-				cc.Director:getInstance():replaceScene(scene)
-			end)
+		item1=cc.ui.UIPushButton.new({normal=Data.getChapterBtnData(i).pic},{scale9=true})
+		item1:onButtonClicked(function ()
+		ModifyData.setChapterNumber(i)
+		local scene=GameScene.new()
+		cc.Director:getInstance():replaceScene(scene)
+		end)
 	    else
-			item1=cc.ui.UIPushButton.new({normal=Data.getChapterBtnData(i).pic2},{scale9=true})
-			item1:onButtonClicked(function ()
-				local cg
-				print("未解锁",i,cg)
-			end)
-		end
-		print(item1:getContentSize().width)
-		local f = (self._layer:getContentSize().width)/6
-			item1:setPosition(cc.p((display.left+display.cx)/2-50+(i-1)*display.cx*2/3, display.cy))
+		item1=cc.ui.UIPushButton.new({normal=Data.getChapterBtnData(i).pic2},{scale9=true})
+		item1:onButtonClicked(function ()
+			local a = ModifyData.getChapterNumber()
+			print(i)
+			print("未解锁")
+		end)
+	end
+	print(item1:getContentSize().width)
+	local f = (self._layer:getContentSize().width)/6
+		item1:setPosition(cc.p((display.left+display.cx)/2-50+(i-1)*display.cx*2/3, display.cy))
 
-		self._scroll:addChild(item1)
+	self._scroll:addChild(item1)
 	end
 
 

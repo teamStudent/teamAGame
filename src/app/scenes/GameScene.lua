@@ -33,13 +33,12 @@ function GameScene:init()
  
 
   local path="map/game"..sceneNum.."-"..chapterNum..".tmx"
-    self.step=20     --步数
-    self.isshuaxinguaiwu=0     --是否已经开始刷新怪物
-    self.fangxiang=0     --主角方向，1为左右，2为上下
+  --点点是字符串连接
+  --print(package.path)
     self.monsterNum=0     --怪物数
     self.number=1    --波数
     self.killEnermyNum=0  --杀敌数
-    self.hp=10   
+    self.hp=10    
        --血量
     self.isWin=false
     self.tileMap =cc.TMXTiledMap:create(path)
@@ -134,12 +133,10 @@ function GameScene:init()
   self.monster={}
   --子弹
   self.bullet={}
-  --主角路线
-  self.luxian={}
   --时间调度，开始出怪
-  --self:createOneEnermy()
-  --self:createEnermy()
-  --初始化道具
+  self:createOneEnermy()
+  self:createEnermy()
+
   self:testTouch()
   -- 时间调度，怪进入塔的攻击范围之内，开始攻击
   self:updata()
@@ -207,7 +204,7 @@ end
 
 
 function GameScene:upOrDownConnon()
-    self.upTag=2
+     self.upTag=2
     self.scope=cc.Sprite:create("scope.png")
     self.scope:pos(self.upSprite:getPositionX(), self.upSprite:getPositionY())
     self.scope:setAnchorPoint(cc.p(0.5,0.5))
@@ -337,9 +334,9 @@ function GameScene:testTouch()
     wuqi1:setTouchEnabled(true)
     wuqi1:setTouchSwallowEnabled(false)
     wuqi1:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)   
-        if event.name=="began" and self.step==0 then
+        if event.name=="began" then
             self.addSp=Wuqi1.new()
-            --self.showLayer:show()
+            self.showLayer:show()
             self.addSp:pos(event.x, event.y)
             self.addSp:setAnchorPoint(cc.p(0.5,0.5))
             self.addSp:addTo(self.tileMap,2)
@@ -350,8 +347,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid>0 then
+            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid<=0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -398,9 +395,9 @@ function GameScene:testTouch()
     wuqi2:setTouchEnabled(true)
     wuqi2:setTouchSwallowEnabled(false)
     wuqi2:addNodeEventListener(cc.NODE_TOUCH_EVENT, function (event)
-      if event.name=="began" and self.step==0 then
+      if event.name=="began" then
             self.addSp=Wuqi2.new()
-            --self.showLayer:show()
+            self.showLayer:show()
             self.addSp:pos(event.x, event.y)
             self.addSp:setAnchorPoint(cc.p(0.5,0.5))
             self.addSp:addTo(self.tileMap,2)
@@ -413,8 +410,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid>0 then
+            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid<=0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -461,9 +458,9 @@ function GameScene:testTouch()
     wuqi3:setTouchEnabled(true)
     wuqi3:setTouchSwallowEnabled(false)
     wuqi3:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)   
-        if event.name=="began" and self.step==0 then
+        if event.name=="began" then
             self.addSp=Wuqi3.new()
-            --self.showLayer:show()
+            self.showLayer:show()
             self.addSp:pos(event.x, event.y)
             self.addSp:setAnchorPoint(cc.p(0.5,0.5))
             self.addSp:addTo(self.tileMap,2)
@@ -474,8 +471,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid>0 then
+            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid<=0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -522,9 +519,9 @@ function GameScene:testTouch()
     wuqi4:setTouchEnabled(true)
     wuqi4:setTouchSwallowEnabled(false)
     wuqi4:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)   
-        if event.name=="began" and self.step==0 then
+        if event.name=="began" then
             self.addSp=Wuqi4.new()
-            --self.showLayer:show()
+            self.showLayer:show()
             self.addSp:pos(event.x, event.y)
             self.addSp:setAnchorPoint(cc.p(0.5,0.5))
             self.addSp:addTo(self.tileMap,2)
@@ -535,8 +532,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid>0 then
+            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid<=0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -558,7 +555,6 @@ function GameScene:testTouch()
         end
         
     end)
-
 
     local money5 = display.newSprite("GameScene/money.png")
     money5:pos(self.wuqi5Point.x-4, display.bottom+3)
@@ -582,8 +578,8 @@ function GameScene:testTouch()
     wuqi5:setTouchEnabled(true)
     wuqi5:setTouchSwallowEnabled(false)
     wuqi5:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)   
-        if event.name=="began" and self.step==0 then
-            --self.showLayer:show()
+        if event.name=="began" then
+            self.showLayer:show()
             self.addSp=Wuqi5.new()
             self.addSp:pos(event.x, event.y)
             self.addSp:setAnchorPoint(cc.p(0.5,0.5))
@@ -595,8 +591,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid>0 then
+            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid<=0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -618,86 +614,12 @@ function GameScene:testTouch()
         end
         
     end)
+
     
-
-    local zhujue=display.newSprite("enermy/enermy6.png")
-    self.beginPoint= self.hero:getObject("begin")
-    zhujue:pos(self.beginPoint.x, self.beginPoint.y)
-    zhujue:addTo(self.tileMap,2)
-
-    local x= self.beginPoint.x/64
-    local y = (640-self.beginPoint.y)/64
-    
-    self.layer:setTileGID(83,cc.p(math.floor(x),math.floor(y)))
-
-    zhujue:setTouchEnabled(true)
-    zhujue:setTouchSwallowEnabled(false)
-    zhujue:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)
-       if event.name=="began" then
-            return true
-        elseif event.name=="moved" then
-          local x= event.x/64
-          local y = (640-event.y)/64
-          local tileGid=self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-          if self.step==0 then
-            --todo
-            --时间调度，开始出怪
-            if self.isshuaxinguaiwu==0 then
-              --todo
-             self:createOneEnermy()
-             self:createEnermy()
-             self.isshuaxinguaiwu=1
-            end
-            return
-          
-          elseif tileGid==0 
-            and math.abs(event.x-zhujue:getPositionX())<=64
-            and math.abs(event.y-zhujue:getPositionY())<32
-            
-             then
-            if event.x>zhujue:getPositionX() then
-              --todo
-              table.insert(self.luxian,4)
-            end
-            if event.x<zhujue:getPositionX() then
-              --todo
-              table.insert(self.luxian,3)
-            end
-            
-            zhujue:setPosition(math.floor(x)*64+32,(10-math.floor(y))*64-32)
-            self.layer:setTileGID(83,cc.p(math.floor(x),math.floor(y)))
-            self.step=self.step-1
-          
-          elseif tileGid==0 
-            and math.abs(event.x-zhujue:getPositionX())<32
-            and math.abs(event.y-zhujue:getPositionY())<=64
-            
-             then
-
-            if event.y>zhujue:getPositionY() then
-              --todo
-              table.insert(self.luxian,1)
-            end
-            if event.y<zhujue:getPositionY() then
-              --todo
-              table.insert(self.luxian,2)
-            end
-            zhujue:setPosition(math.floor(x)*64+32,(10-math.floor(y))*64-32)
-            self.layer:setTileGID(116,cc.p(math.floor(x),math.floor(y)))
-            self.step=self.step-1
-            --self.fangxiang=2
-          end
-        elseif event.name=="ended" then
-        print(table.concat(self.luxian))
-            
-        end
-        
-    end)
 end
 
 function GameScene:attack(v1,v)
---v1当前处理的加农炮
---当前处理的敌人
+
 
   if v1:getTag()==10 then
     local rotate=cc.RotateTo:create(0.01,self:angle(v1,v)+180)
@@ -710,7 +632,7 @@ function GameScene:attack(v1,v)
     bullet:addTo(self.tileMap,3) 
 
     local move=cc.MoveTo:create(0.2,cc.p(v:getPositionX(),v:getPositionY()))
-    local func = cc.CallFunc:create(function (bullet)
+    local func = cc.CallFunc:create(function (event)
     -- if bullet~=nil then
     --    local x =table.keyof(self.bullet, bullet)
     --         -- local y=table.removebyvalue(self.bullet, bullet, true)
@@ -722,7 +644,7 @@ function GameScene:attack(v1,v)
     --        table.remove(self.bullet,x)
     --   end
     self.bullet[#self.bullet+1]=bullet
-    bullet.isMove=false
+    event.isMove=false
     end)
     local seq = cc.Sequence:create(move,func) 
     bullet.isMove=true
@@ -737,7 +659,7 @@ function GameScene:attack(v1,v)
     bullet:setPosition(v1:getPositionX(),v1:getPositionY())
     bullet:setRotation(v1:getRotation())
     local move=cc.MoveTo:create(0.2,cc.p(v:getPositionX(),v:getPositionY()))
-    local func = cc.CallFunc:create(function(bullet)
+    local func = cc.CallFunc:create(function(event)
     -- if bullet~=nil then
     --       local x =table.keyof(self.bullet, bullet)
     --         -- local y=table.removebyvalue(self.bullet, bullet, true)
@@ -747,7 +669,7 @@ function GameScene:attack(v1,v)
     --        table.remove(self.bullet,x)
     --   end
     self.bullet[#self.bullet+1]=bullet
-      bullet.isMove=false
+      event.isMove=false
     end)
     seq = cc.Sequence:create(move,func) 
     bullet.isMove=true
@@ -763,7 +685,7 @@ function GameScene:attack(v1,v)
     bullet:setRotation(v1:getRotation())
     bullet:setPosition(v1:getPositionX(),v1:getPositionY())
     local move=cc.MoveTo:create(0.2,cc.p(v:getPositionX(),v:getPositionY()))
-    local func = cc.CallFunc:create(function (bullet)
+    local func = cc.CallFunc:create(function (event)
     
     -- if bullet~=nil then
     --       local x =table.keyof(self.bullet, bullet)
@@ -774,7 +696,7 @@ function GameScene:attack(v1,v)
     --       table.remove(self.bullet,x)
     --   end
     self.bullet[#self.bullet+1]=bullet
-    bullet.isMove=false
+    event.isMove=false
     end)
     local seq = cc.Sequence:create(move,func) 
     bullet.isMove=true
@@ -809,10 +731,10 @@ function GameScene:attack(v1,v)
     -- local animation = display.newAnimation(frames,0.01)
     -- local animate = cc.Animate:create(animation)
 
-    local func = cc.CallFunc:create(function (bullet)
+    local func = cc.CallFunc:create(function (event)
           
           self.bullet[#self.bullet+1]=bullet
-          bullet.isMove=false
+          event.isMove=false
             
     end)
     
@@ -846,10 +768,10 @@ function GameScene:attack(v1,v)
         -- elseif i==8 then
         --     move=cc.MoveBy:create(0.5, cc.p(radious*math.sin(45*3.14/180),-radious*math.sin(45*3.14/180)))
         -- end
-        local func = cc.CallFunc:create(function (bullet)
+        local func = cc.CallFunc:create(function (event)
 
            self.bullet[#self.bullet+1]=bullet
-            bullet.isMove=false
+            event.isMove=false
           --  if bullet~=nil then
           --   -- local x =table.keyof(self.bullet, bullet)
           --   -- local y=table.removebyvalue(self.bullet, bullet, true)
@@ -1100,7 +1022,7 @@ function GameScene:createEnermy()
     -- end
 
   end
-   self.handle1= scheduler.scheduleGlobal(createE,15)
+   self.handle1= scheduler.scheduleGlobal(createE,40)
 
 
    
@@ -1180,69 +1102,78 @@ function GameScene:creatDongHua()
     local i=1
     local timee
 
-    -- if chapterNum>3 and self.rad==2 then
-    --    i=11
-    --    for k,v in pairs(enermy) do
-    --     local name1="tag"..i
-    --     if v.name==name1 then
-    --         if i==11 then
-    --             local x= self.beginPoint.x-v.x
-    --             local y = self.beginPoint.y-v.y
-    --             timee = math.sqrt(x*x+y*y)/self.moveSpeed
-    --         else
-    --             local str = "tag"..(i-1)
-    --             local upv = self.hero:getObject(str)
-    --             local x= upv.x-v.x
-    --             local y = upv.y-v.y
-    --             timee = math.sqrt(x*x+y*y)/self.moveSpeed
-    --         end
-    --         i=i+1
-
-    --         move[#move+1]=cc.MoveTo:create(timee,cc.p(v.x,v.y))
-    --     end
-    -- end
-    -- elseif chapterNum>5 and self.rad==3 then
-    --   i=21
-    --    for k,v in pairs(enermy) do
-    --     local name1="tag"..i
-    --     if v.name==name1 then
-    --         if i==21 then
-    --             local x= self.beginPoint.x-v.x
-    --             local y = self.beginPoint.y-v.y
-    --             timee = math.sqrt(x*x+y*y)/self.moveSpeed
-    --         else
-    --             local str = "tag"..(i-1)
-    --             local upv = self.hero:getObject(str)
-    --             local x= upv.x-v.x
-    --             local y = upv.y-v.y
-    --             timee = math.sqrt(x*x+y*y)/self.moveSpeed
-    --         end
-    --         i=i+1
-
-    --         move[#move+1]=cc.MoveTo:create(timee,cc.p(v.x,v.y))
-    --     end
-    -- end
-    -- else
-      i=1
-        for k,v in pairs(self.luxian) do
-        local name1=self.luxian[i]
-        timee = 64/self.moveSpeed
-        if name1==1 then
-          move[#move+1]=cc.MoveBy:create(timee,cc.p(0,64))
-        end
-        if name1==2 then
-          move[#move+1]=cc.MoveBy:create(timee,cc.p(0,-64))
-        end
-        if name1==3 then
-          move[#move+1]=cc.MoveBy:create(timee,cc.p(-64,0))
-        end
-        if name1==4 then
-          move[#move+1]=cc.MoveBy:create(timee,cc.p(64,0))
-        end
+    if chapterNum>3 and self.rad==2 then
+       i=11
+       for k,v in pairs(enermy) do
+        local name1="tag"..i
+        if v.name==name1 then
+            if i==11 then
+                local x= self.beginPoint.x-v.x
+                local y = self.beginPoint.y-v.y
+                timee = math.sqrt(x*x+y*y)/self.moveSpeed
+            else
+                local str = "tag"..(i-1)
+                local upv = self.hero:getObject(str)
+                local x= upv.x-v.x
+                local y = upv.y-v.y
+                timee = math.sqrt(x*x+y*y)/self.moveSpeed
+            end
             i=i+1
-        
-    --end
+
+            move[#move+1]=cc.MoveTo:create(timee,cc.p(v.x,v.y))
+        end
     end
+    elseif chapterNum>5 and self.rad==3 then
+      i=21
+       for k,v in pairs(enermy) do
+        local name1="tag"..i
+        if v.name==name1 then
+            if i==21 then
+                local x= self.beginPoint.x-v.x
+                local y = self.beginPoint.y-v.y
+                timee = math.sqrt(x*x+y*y)/self.moveSpeed
+            else
+                local str = "tag"..(i-1)
+                local upv = self.hero:getObject(str)
+                local x= upv.x-v.x
+                local y = upv.y-v.y
+                timee = math.sqrt(x*x+y*y)/self.moveSpeed
+            end
+            i=i+1
+
+            move[#move+1]=cc.MoveTo:create(timee,cc.p(v.x,v.y))
+        end
+    end
+    else
+      i=1
+        for k,v in pairs(enermy) do
+        local name1="tag"..i
+        if v.name==name1 then
+            if i==1 then
+                local x= self.beginPoint.x-v.x
+                local y = self.beginPoint.y-v.y
+                timee = math.sqrt(x*x+y*y)/self.moveSpeed
+            else
+                local str = "tag"..(i-1)
+                local upv = self.hero:getObject(str)
+                local x= upv.x-v.x
+                local y = upv.y-v.y
+                timee = math.sqrt(x*x+y*y)/self.moveSpeed
+            end
+            i=i+1
+
+            move[#move+1]=cc.MoveTo:create(timee,cc.p(v.x,v.y))
+        end
+    end
+    end
+
+   
+    local str = "tag"..(i-1)
+    local upv = self.hero:getObject(str)
+    local x= upv.x-self.endPoint.x
+    local y = upv.y-self.endPoint.y
+    timee = math.sqrt(x*x+y*y)/self.moveSpeed
+    move[#move+1]=cc.MoveTo:create(timee,cc.p(self.endPoint.x, self.endPoint.y))
     move[#move+1]=cc.CallFunc:create(function (event)
         event.isMove=false
     end)
@@ -1298,6 +1229,8 @@ function GameScene:removeUpdata()
             if v1.tag==100 then
                     rect2=v1:getBoundingBox()
 
+                    --v1:getBoundingBox().inters
+
                     if cc.rectIntersectsRect(rect2,rect1) then
 
                         v.hp=v.hp-v1.firepower
@@ -1333,6 +1266,7 @@ function GameScene:removeUpdata()
                         v1:removeFromParent()
                         v1=nil
                         table.remove(self.bullet,k1)
+                        
                     end 
                 elseif v1.tag==500 then
                     rect2=v1:getBoundingBox()
@@ -1352,6 +1286,14 @@ function GameScene:removeUpdata()
             if  self.monster[i].isMove==false then
                     self.hp=self.hp-1
                     if self.hp<1 then
+
+                      --对死去怪物计数
+                      local a=cc.UserDefault:getInstance():getIntegerForKey("monsterNum")
+                      cc.UserDefault:getInstance():setIntegerForKey("monsterNum",a+1)
+                      
+                      -- if conditions then
+                      --   --todo
+                      -- end
                         cc.Director:getInstance():pause()
 
                         if self.handle~=nil then
@@ -1377,9 +1319,9 @@ function GameScene:removeUpdata()
             end
             if self.monster[i]~=nil and self.monster[i].hp<=0 then
                
-                --if self.monster[i]._hp~=1  then
+                if self.monster[i]._hp~=1  then
                    
-                --end
+                end
                 self.money=self.money+self.monster[i].money
                 self.moneyNumLabel:setString(self.money)
                 self.killEnermyNum=self.killEnermyNum+1

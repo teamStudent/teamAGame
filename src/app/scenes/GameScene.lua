@@ -33,10 +33,13 @@ function GameScene:init()
  
 
   local path="map/game"..sceneNum.."-"..chapterNum..".tmx"
+    self.step=20     --步数
+    self.isshuaxinguaiwu=0     --是否已经开始刷新怪物
+    self.fangxiang=0     --主角方向，1为左右，2为上下
     self.monsterNum=0     --怪物数
     self.number=1    --波数
     self.killEnermyNum=0  --杀敌数
-    self.hp=10    
+    self.hp=10   
        --血量
     self.isWin=false
     self.tileMap =cc.TMXTiledMap:create(path)
@@ -131,9 +134,11 @@ function GameScene:init()
   self.monster={}
   --子弹
   self.bullet={}
+  --主角路线
+  self.luxian={}
   --时间调度，开始出怪
-  self:createOneEnermy()
-  self:createEnermy()
+  --self:createOneEnermy()
+  --self:createEnermy()
   --初始化道具
   self:testTouch()
   -- 时间调度，怪进入塔的攻击范围之内，开始攻击
@@ -332,9 +337,9 @@ function GameScene:testTouch()
     wuqi1:setTouchEnabled(true)
     wuqi1:setTouchSwallowEnabled(false)
     wuqi1:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)   
-        if event.name=="began" then
+        if event.name=="began" and self.step==0 then
             self.addSp=Wuqi1.new()
-            self.showLayer:show()
+            --self.showLayer:show()
             self.addSp:pos(event.x, event.y)
             self.addSp:setAnchorPoint(cc.p(0.5,0.5))
             self.addSp:addTo(self.tileMap,2)
@@ -345,8 +350,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid<=0 then
+            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid>0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -393,9 +398,9 @@ function GameScene:testTouch()
     wuqi2:setTouchEnabled(true)
     wuqi2:setTouchSwallowEnabled(false)
     wuqi2:addNodeEventListener(cc.NODE_TOUCH_EVENT, function (event)
-      if event.name=="began" then
+      if event.name=="began" and self.step==0 then
             self.addSp=Wuqi2.new()
-            self.showLayer:show()
+            --self.showLayer:show()
             self.addSp:pos(event.x, event.y)
             self.addSp:setAnchorPoint(cc.p(0.5,0.5))
             self.addSp:addTo(self.tileMap,2)
@@ -408,8 +413,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid<=0 then
+            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid>0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -456,9 +461,9 @@ function GameScene:testTouch()
     wuqi3:setTouchEnabled(true)
     wuqi3:setTouchSwallowEnabled(false)
     wuqi3:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)   
-        if event.name=="began" then
+        if event.name=="began" and self.step==0 then
             self.addSp=Wuqi3.new()
-            self.showLayer:show()
+            --self.showLayer:show()
             self.addSp:pos(event.x, event.y)
             self.addSp:setAnchorPoint(cc.p(0.5,0.5))
             self.addSp:addTo(self.tileMap,2)
@@ -469,8 +474,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid<=0 then
+            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid>0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -517,9 +522,9 @@ function GameScene:testTouch()
     wuqi4:setTouchEnabled(true)
     wuqi4:setTouchSwallowEnabled(false)
     wuqi4:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)   
-        if event.name=="began" then
+        if event.name=="began" and self.step==0 then
             self.addSp=Wuqi4.new()
-            self.showLayer:show()
+            --self.showLayer:show()
             self.addSp:pos(event.x, event.y)
             self.addSp:setAnchorPoint(cc.p(0.5,0.5))
             self.addSp:addTo(self.tileMap,2)
@@ -530,8 +535,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid<=0 then
+            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid>0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -553,6 +558,7 @@ function GameScene:testTouch()
         end
         
     end)
+
 
     local money5 = display.newSprite("GameScene/money.png")
     money5:pos(self.wuqi5Point.x-4, display.bottom+3)
@@ -576,8 +582,8 @@ function GameScene:testTouch()
     wuqi5:setTouchEnabled(true)
     wuqi5:setTouchSwallowEnabled(false)
     wuqi5:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)   
-        if event.name=="began" then
-            self.showLayer:show()
+        if event.name=="began" and self.step==0 then
+            --self.showLayer:show()
             self.addSp=Wuqi5.new()
             self.addSp:pos(event.x, event.y)
             self.addSp:setAnchorPoint(cc.p(0.5,0.5))
@@ -589,8 +595,8 @@ function GameScene:testTouch()
             self.showLayer:hide()
             local x= event.x/64
             local y = (640-event.y)/64
-            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
-            if tileGid<=0 then
+            local tileGid = self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid>0 then
                 self.addSp:removeFromParent()
                 return
             end
@@ -612,8 +618,81 @@ function GameScene:testTouch()
         end
         
     end)
-
     
+
+    local zhujue=display.newSprite("enermy/enermy6.png")
+    self.beginPoint= self.hero:getObject("begin")
+    zhujue:pos(self.beginPoint.x, self.beginPoint.y)
+    zhujue:addTo(self.tileMap,2)
+
+    local x= self.beginPoint.x/64
+    local y = (640-self.beginPoint.y)/64
+    
+    self.layer:setTileGID(83,cc.p(math.floor(x),math.floor(y)))
+
+    zhujue:setTouchEnabled(true)
+    zhujue:setTouchSwallowEnabled(false)
+    zhujue:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)
+       if event.name=="began" then
+            return true
+        elseif event.name=="moved" then
+          local x= event.x/64
+          local y = (640-event.y)/64
+          local tileGid=self.layer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+          if self.step==0 then
+            --todo
+            --时间调度，开始出怪
+            if self.isshuaxinguaiwu==0 then
+              --todo
+             self:createOneEnermy()
+             self:createEnermy()
+             self.isshuaxinguaiwu=1
+            end
+            return
+          
+          elseif tileGid==0 
+            and math.abs(event.x-zhujue:getPositionX())<=64
+            and math.abs(event.y-zhujue:getPositionY())<32
+            
+             then
+            if event.x>zhujue:getPositionX() then
+              --todo
+              table.insert(self.luxian,4)
+            end
+            if event.x<zhujue:getPositionX() then
+              --todo
+              table.insert(self.luxian,3)
+            end
+            
+            zhujue:setPosition(math.floor(x)*64+32,(10-math.floor(y))*64-32)
+            self.layer:setTileGID(83,cc.p(math.floor(x),math.floor(y)))
+            self.step=self.step-1
+          
+          elseif tileGid==0 
+            and math.abs(event.x-zhujue:getPositionX())<32
+            and math.abs(event.y-zhujue:getPositionY())<=64
+            
+             then
+
+            if event.y>zhujue:getPositionY() then
+              --todo
+              table.insert(self.luxian,1)
+            end
+            if event.y<zhujue:getPositionY() then
+              --todo
+              table.insert(self.luxian,2)
+            end
+            zhujue:setPosition(math.floor(x)*64+32,(10-math.floor(y))*64-32)
+            self.layer:setTileGID(116,cc.p(math.floor(x),math.floor(y)))
+            self.step=self.step-1
+            --self.fangxiang=2
+          end
+        elseif event.name=="ended" then
+        print(table.concat(self.luxian))
+            
+        end
+        
+    end)
 end
 
 function GameScene:attack(v1,v)
@@ -1021,7 +1100,7 @@ function GameScene:createEnermy()
     -- end
 
   end
-   self.handle1= scheduler.scheduleGlobal(createE,40)
+   self.handle1= scheduler.scheduleGlobal(createE,15)
 
 
    
@@ -1101,78 +1180,69 @@ function GameScene:creatDongHua()
     local i=1
     local timee
 
-    if chapterNum>3 and self.rad==2 then
-       i=11
-       for k,v in pairs(enermy) do
-        local name1="tag"..i
-        if v.name==name1 then
-            if i==11 then
-                local x= self.beginPoint.x-v.x
-                local y = self.beginPoint.y-v.y
-                timee = math.sqrt(x*x+y*y)/self.moveSpeed
-            else
-                local str = "tag"..(i-1)
-                local upv = self.hero:getObject(str)
-                local x= upv.x-v.x
-                local y = upv.y-v.y
-                timee = math.sqrt(x*x+y*y)/self.moveSpeed
-            end
-            i=i+1
+    -- if chapterNum>3 and self.rad==2 then
+    --    i=11
+    --    for k,v in pairs(enermy) do
+    --     local name1="tag"..i
+    --     if v.name==name1 then
+    --         if i==11 then
+    --             local x= self.beginPoint.x-v.x
+    --             local y = self.beginPoint.y-v.y
+    --             timee = math.sqrt(x*x+y*y)/self.moveSpeed
+    --         else
+    --             local str = "tag"..(i-1)
+    --             local upv = self.hero:getObject(str)
+    --             local x= upv.x-v.x
+    --             local y = upv.y-v.y
+    --             timee = math.sqrt(x*x+y*y)/self.moveSpeed
+    --         end
+    --         i=i+1
 
-            move[#move+1]=cc.MoveTo:create(timee,cc.p(v.x,v.y))
-        end
-    end
-    elseif chapterNum>5 and self.rad==3 then
-      i=21
-       for k,v in pairs(enermy) do
-        local name1="tag"..i
-        if v.name==name1 then
-            if i==21 then
-                local x= self.beginPoint.x-v.x
-                local y = self.beginPoint.y-v.y
-                timee = math.sqrt(x*x+y*y)/self.moveSpeed
-            else
-                local str = "tag"..(i-1)
-                local upv = self.hero:getObject(str)
-                local x= upv.x-v.x
-                local y = upv.y-v.y
-                timee = math.sqrt(x*x+y*y)/self.moveSpeed
-            end
-            i=i+1
+    --         move[#move+1]=cc.MoveTo:create(timee,cc.p(v.x,v.y))
+    --     end
+    -- end
+    -- elseif chapterNum>5 and self.rad==3 then
+    --   i=21
+    --    for k,v in pairs(enermy) do
+    --     local name1="tag"..i
+    --     if v.name==name1 then
+    --         if i==21 then
+    --             local x= self.beginPoint.x-v.x
+    --             local y = self.beginPoint.y-v.y
+    --             timee = math.sqrt(x*x+y*y)/self.moveSpeed
+    --         else
+    --             local str = "tag"..(i-1)
+    --             local upv = self.hero:getObject(str)
+    --             local x= upv.x-v.x
+    --             local y = upv.y-v.y
+    --             timee = math.sqrt(x*x+y*y)/self.moveSpeed
+    --         end
+    --         i=i+1
 
-            move[#move+1]=cc.MoveTo:create(timee,cc.p(v.x,v.y))
-        end
-    end
-    else
+    --         move[#move+1]=cc.MoveTo:create(timee,cc.p(v.x,v.y))
+    --     end
+    -- end
+    -- else
       i=1
-        for k,v in pairs(enermy) do
-        local name1="tag"..i
-        if v.name==name1 then
-            if i==1 then
-                local x= self.beginPoint.x-v.x
-                local y = self.beginPoint.y-v.y
-                timee = math.sqrt(x*x+y*y)/self.moveSpeed
-            else
-                local str = "tag"..(i-1)
-                local upv = self.hero:getObject(str)
-                local x= upv.x-v.x
-                local y = upv.y-v.y
-                timee = math.sqrt(x*x+y*y)/self.moveSpeed
-            end
-            i=i+1
-
-            move[#move+1]=cc.MoveTo:create(timee,cc.p(v.x,v.y))
+        for k,v in pairs(self.luxian) do
+        local name1=self.luxian[i]
+        timee = 64/self.moveSpeed
+        if name1==1 then
+          move[#move+1]=cc.MoveBy:create(timee,cc.p(0,64))
         end
+        if name1==2 then
+          move[#move+1]=cc.MoveBy:create(timee,cc.p(0,-64))
+        end
+        if name1==3 then
+          move[#move+1]=cc.MoveBy:create(timee,cc.p(-64,0))
+        end
+        if name1==4 then
+          move[#move+1]=cc.MoveBy:create(timee,cc.p(64,0))
+        end
+            i=i+1
+        
+    --end
     end
-    end
-
-   
-    local str = "tag"..(i-1)
-    local upv = self.hero:getObject(str)
-    local x= upv.x-self.endPoint.x
-    local y = upv.y-self.endPoint.y
-    timee = math.sqrt(x*x+y*y)/self.moveSpeed
-    move[#move+1]=cc.MoveTo:create(timee,cc.p(self.endPoint.x, self.endPoint.y))
     move[#move+1]=cc.CallFunc:create(function (event)
         event.isMove=false
     end)

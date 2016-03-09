@@ -28,7 +28,6 @@ function AwardScene:init()
     -- 宝箱
 	local baoxiang = cc.ui.UIPushButton.new({normal="AwardScene/baoxiang1.png",pressed="AwardScene/baoxiang2.png"},{scale9=true})
 	baoxiang:onButtonClicked(function(event)
-		--
 	end)
 	baoxiang:pos(display.cx, display.cy+75)
 	self:addChild(baoxiang, 1)

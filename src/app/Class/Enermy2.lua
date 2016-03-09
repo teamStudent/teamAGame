@@ -15,13 +15,5 @@ function Enermy2:ctor()
 	self.life:setAnchorPoint(cc.p(0,0.5))
 	self.life:pos(0,48)
 	self.life:addTo(self)
-	self.wuxing=cc.ui.UILabel.new({
-      text = "金",
-      color = cc.c3b(250, 250, 5),
-      size = 15,
-    })
-    self.wuxing:setAnchorPoint(cc.p(0,0))
-    self.wuxing:pos(0,0)
-	self.wuxing:addTo(self)
 end
 return Enermy2

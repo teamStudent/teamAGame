@@ -19,6 +19,16 @@ function Enermy:ctor()
 	self.life:pos(0,45)
 	self.life:addTo(self)
 
+	self.yuansu=4 --金1木2水3火4土5
+	self.wuxing=cc.ui.UILabel.new({
+      text = "火",
+      color = cc.c3b(250, 250, 5),
+      size = 15,
+    })
+    self.wuxing:setAnchorPoint(cc.p(0,0))
+    self.wuxing:pos(0,48)
+	self.wuxing:addTo(self,2)
+
 	 -- self:startAnimation()
 	
 end

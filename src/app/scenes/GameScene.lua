@@ -1299,8 +1299,15 @@ function GameScene:removeUpdata()
                     rect2=v1:getBoundingBox()
 
                     if cc.rectIntersectsRect(rect2,rect1) then
-
-                        v.hp=v.hp-v1.firepower
+                        if v.yuansu == 4 then
+                          v.hp=v.hp-v1.firepower*2
+                          local particle = cc.ParticleSystemQuad:create("GameScene/bomb.plist");
+                          particle:pos(v:getPositionX(), v:getPositionY())
+                          particle:addTo(self.tileMap,2)
+                        else
+                          v.hp=v.hp-v1.firepower
+                        end
+                  
                         v.life:setScaleX(v.hp/v.old_life)
                         v1:removeFromParent()
                         v1=nil

@@ -18,10 +18,6 @@ function StartScene:init()
 	bg:setPosition(cc.p(display.cx,display.cy))
 	self:addChild(bg)
 
-	-- local bb = Enermy:new()
-	-- bb:setPosition(100,100)
-	-- self:addChild(bb, 3)
-
 
     
 	self._startButton = cc.ui.UIPushButton.new({normal="StartScene/play.png"},{scale9=true})

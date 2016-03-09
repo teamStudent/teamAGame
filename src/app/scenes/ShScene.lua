@@ -942,28 +942,12 @@ local function remove_nomove()
 
         for i=#self.monster,1,-1 do
             if  self.monster[i].isMove==false then
-                        if self.handle~=nil then
-                            scheduler.unscheduleGlobal(self.handle)
-                        end
-                        if self.handle1~=nil then
-                            scheduler.unscheduleGlobal(self.handle1)
-                        end
-                        if self.handle2~=nil then
-                            scheduler.unscheduleGlobal(self.handle2)
-                        end
-                        if self.remove~=nil then
-                            scheduler.unscheduleGlobal(self.remove)
-                        end
-                    self.hpNumLabel:setString(self.hp)
+                    print("ISMOVE=",self.monster[i].isMove)
                     self.monster[i]:removeFromParent()
                     table.remove(self.monster,i)
                     v=nil
             end
             if self.monster[i]~=nil and self.monster[i].hp<=0 then
-               
-                if self.monster[i]._hp~=1  then
-                   
-                end
                 self.money=self.money+self.monster[i].money
                 self.moneyNumLabel:setString(self.money)
                 self.killEnermyNumber=self.killEnermyNumber+1
@@ -974,7 +958,7 @@ local function remove_nomove()
                 math.randomseed(os.time())
                 local time = math.random()
                 print("time",time)
-                if time<=0.2 then
+                if time<=0.02 then
                    local sp=display.newSprite("tree.png")
                    sp:pos(display.width/2, display.height/2)
                    sp:setScale(0.5)

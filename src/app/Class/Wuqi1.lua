@@ -21,5 +21,6 @@ function Wuqi1:init()
 	self.upMake=90
 	self.removeMake=64
 	self.totalMake=80
+	self.exp=0
 end
 return Wuqi1

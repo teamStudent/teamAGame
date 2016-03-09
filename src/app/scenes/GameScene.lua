@@ -320,7 +320,7 @@ function GameScene:testTouch()
     money1:addTo(self.tileMap)
       --显示需要金币的数量
      cc.ui.UILabel.new({
-      text = "80",
+      text = "金".."80",
       color = cc.c3b(250, 250, 5),
       size = 15,
     })
@@ -381,7 +381,7 @@ function GameScene:testTouch()
     money2:addTo(self.tileMap)
       --显示需要金币的数量
      cc.ui.UILabel.new({
-      text = "100",
+      text = "木".."100",
       color = cc.c3b(250, 250, 5),
       size = 15,
     })
@@ -444,7 +444,7 @@ function GameScene:testTouch()
     money3:addTo(self.tileMap)
       --显示需要金币的数量
      cc.ui.UILabel.new({
-      text = "120",
+      text = "水".."120",
       color = cc.c3b(250, 250, 5),
       size = 15,
     })
@@ -505,7 +505,7 @@ function GameScene:testTouch()
     money4:addTo(self.tileMap)
       --显示需要金币的数量
      cc.ui.UILabel.new({
-      text = "200",
+      text = "火".."200",
       color = cc.c3b(250, 250, 5),
       size = 15,
     })
@@ -566,7 +566,7 @@ function GameScene:testTouch()
     money5:addTo(self.tileMap)
       --显示需要金币的数量
      cc.ui.UILabel.new({
-      text = "300",
+      text = "土".."300",
       color = cc.c3b(250, 250, 5),
       size = 15,
     })

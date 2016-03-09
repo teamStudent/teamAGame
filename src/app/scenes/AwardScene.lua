@@ -11,12 +11,6 @@ function AwardScene:ctor()
 end
 -- 初始化
 function AwardScene:init()
-	--不同卡牌类型数目的初始化
-	cc.UserDefault:getInstance():setIntegerForKey("kapai1num", 0)
-	cc.UserDefault:getInstance():setIntegerForKey("kapai2num", 0)
-	cc.UserDefault:getInstance():setIntegerForKey("kapai3num", 0)
-	cc.UserDefault:getInstance():setIntegerForKey("kapai4num", 0)
-	cc.UserDefault:getInstance():setIntegerForKey("kapai5num", 0)
 	-- 背景
 	local bg = display.newSprite("AwardScene/bg.png")
 	bg:pos(display.cx, display.cy)
@@ -73,19 +67,19 @@ function AwardScene:init()
 				front:runAction(cc.Spawn:create(orbit2,seq2))
 				if ran==1 then
 					cc.UserDefault:getInstance():setIntegerForKey("kapai1num", cc.UserDefault:getInstance():getIntegerForKey("kapai1num")+1)
-					print(cc.UserDefault:getInstance():getIntegerForKey("kapai1num"))
+					print("kapai1num",cc.UserDefault:getInstance():getIntegerForKey("kapai1num"))
 				elseif ran==2 then
 					cc.UserDefault:getInstance():setIntegerForKey("kapai2num", cc.UserDefault:getInstance():getIntegerForKey("kapai2num")+1)
-					print(cc.UserDefault:getInstance():getIntegerForKey("kapai2num"))
+					print("kapai2num",cc.UserDefault:getInstance():getIntegerForKey("kapai2num"))
 				elseif ran==3 then
 					cc.UserDefault:getInstance():setIntegerForKey("kapai3num", cc.UserDefault:getInstance():getIntegerForKey("kapai3num")+1)
-					print(cc.UserDefault:getInstance():getIntegerForKey("kapai3num"))
+					print("kapai3num",cc.UserDefault:getInstance():getIntegerForKey("kapai3num"))
 				elseif ran==4 then
 					cc.UserDefault:getInstance():setIntegerForKey("kapai4num", cc.UserDefault:getInstance():getIntegerForKey("kapai4num")+1)
-					print(cc.UserDefault:getInstance():getIntegerForKey("kapai4num"))
+					print("kapai4num",cc.UserDefault:getInstance():getIntegerForKey("kapai4num"))
 				else
 					cc.UserDefault:getInstance():setIntegerForKey("kapai5num", cc.UserDefault:getInstance():getIntegerForKey("kapai5num")+1)
-					print(cc.UserDefault:getInstance():getIntegerForKey("kapai5num"))
+					print("kapai5num",cc.UserDefault:getInstance():getIntegerForKey("kapai5num"))
 				end
 				return true
 			end

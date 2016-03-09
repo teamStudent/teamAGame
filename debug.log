@@ -57,6 +57,27 @@ libpng warning: iCCP: known incorrect sRGB profile
 [LUA-print] [INFO] # display.c_top                = 320.00
 [LUA-print] [INFO] # display.c_bottom             = -320.00
 [LUA-print] [INFO] #
-[LUA ERROR] load "/Users/qinjia/Desktop/develop/clone/teamAGame/src/app/scenes/AwardScene.lua", error: syntax error during pre-compilation.
-[LUA ERROR] error loading module 'app.scenes.AwardScene' from file '/Users/qinjia/Desktop/develop/clone/teamAGame/src/app/scenes/AwardScene.lua':
-	/Users/qinjia/Desktop/develop/clone/teamAGame/src/app/scenes/AwardScene.lua:87: unexpected symbol near ')'
+[LUA-print] date	9
+[LUA-print] month	3
+[LUA-print] year	2016
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+[LUA-print] kapai4num	1
+[LUA-print] kapai1num	1
+[LUA-print] kapai5num	1
+[LUA-print] kapai4num	2
+[LUA-print] kapai5num	2
+[LUA-print] date	9
+[LUA-print] month	3
+[LUA-print] year	2016
+libpng warning: iCCP: known incorrect sRGB profile
+libpng warning: iCCP: known incorrect sRGB profile
+[LUA-print] date	9
+[LUA-print] month	3
+[LUA-print] year	2016

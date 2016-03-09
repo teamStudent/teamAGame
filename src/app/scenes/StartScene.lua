@@ -44,16 +44,28 @@ function StartScene:init()
      							cc.UserDefault:getInstance():setIntegerForKey("date",date)
      							display.replaceScene(AwardScene.new(),"pageTurn",1.2)
      				    else 
-     				    	if  tonumber(month)~=cc.UserDefault:getInstance():getIntegerForKey("month") then
-     							cc.UserDefault:getInstance():setIntegerForKey("date",date)
-     							display.replaceScene(AwardScene.new(),"pageTurn",1.2)
-							else
-								if  tonumber(year)~=cc.UserDefault:getInstance():getIntegerForKey("year") then
-     							cc.UserDefault:getInstance():setIntegerForKey("year",date)
-     							display.replaceScene(AwardScene.new(),"pageTurn",1.2)
+     	-- 	-- 		    	if  tonumber(month)~=cc.UserDefault:getInstance():getIntegerForKey("month") then
+     	-- 	-- 					cc.UserDefault:getInstance():setIntegerForKey("date",date)
+     	-- 	-- 					display.replaceScene(AwardScene.new(),"pageTurn",1.2)
+						-- 	-- else
+						-- 	-- 	if  tonumber(year)~=cc.UserDefault:getInstance():getIntegerForKey("year") then
+     	-- 	-- 					cc.UserDefault:getInstance():setIntegerForKey("year",date)
+     	-- 	-- 					display.replaceScene(AwardScene.new(),"pageTurn",1.2)
 						
-								end
-							end
+						-- 	-- 	end
+						-- 	-- end
+							local label = display.newTTFLabel({
+								text="You have awarded today !",
+								font="Marker Felt",
+								size=30,
+								align=cc.TEXT_ALIGNMENT_CENTER
+								})
+							label:enableShadow();
+							label:setPosition(display.cx-10, display.cy-210)
+							self:addChild(label)
+							local seq=cc.Sequence:create(cc.DelayTime:create(1.5),
+							  cc.FadeOut:create(2))
+							label:runAction(seq)
 						end		
      					end)
      					:pos(display.cx-10, display.cy-170)

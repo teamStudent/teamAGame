@@ -44,47 +44,62 @@ function AwardScene:init()
 		front:pos(display.cx-300+150*(i-1), display.cy-150)
 		front:setVisible(false)
 		self:add(front)
+		back.isTouch = false
 
 		back:setTouchMode(cc.TOUCH_MODE_ONE_BY_ONE)
 		back:setTouchEnabled(true)
+		back:setScaleX(-1)
 		back:addNodeEventListener(
 		cc.NODE_TOUCH_EVENT, 
 		function(event)
 			if event.name == "began" then
-        		local seq1=cc.Sequence:create(cc.DelayTime:create(0.5),
-							  cc.Show:create(),
-							  cc.DelayTime:create(1.0),
-							  cc.Hide:create())
-				local orbit1 = cc.OrbitCamera:create(2.0,1,0,0,360,0,0)
-
-				local  seq2=cc.Sequence:create(cc.DelayTime:create(0.5),
-							   cc.Hide:create(),
-							   cc.DelayTime:create(1.0),
-							   cc.Show:create())
-				local orbit2 = orbit1:clone()
-				back:runAction(cc.Spawn:create(orbit1,seq1))
-				front:runAction(cc.Spawn:create(orbit2,seq2))
-				if ran==1 then
-					cc.UserDefault:getInstance():setIntegerForKey("kapai1num", cc.UserDefault:getInstance():getIntegerForKey("kapai1num")+1)
-					print("kapai1num",cc.UserDefault:getInstance():getIntegerForKey("kapai1num"))
-				elseif ran==2 then
-					cc.UserDefault:getInstance():setIntegerForKey("kapai2num", cc.UserDefault:getInstance():getIntegerForKey("kapai2num")+1)
-					print("kapai2num",cc.UserDefault:getInstance():getIntegerForKey("kapai2num"))
-				elseif ran==3 then
-					cc.UserDefault:getInstance():setIntegerForKey("kapai3num", cc.UserDefault:getInstance():getIntegerForKey("kapai3num")+1)
-					print("kapai3num",cc.UserDefault:getInstance():getIntegerForKey("kapai3num"))
-				elseif ran==4 then
-					cc.UserDefault:getInstance():setIntegerForKey("kapai4num", cc.UserDefault:getInstance():getIntegerForKey("kapai4num")+1)
-					print("kapai4num",cc.UserDefault:getInstance():getIntegerForKey("kapai4num"))
-				else
-					cc.UserDefault:getInstance():setIntegerForKey("kapai5num", cc.UserDefault:getInstance():getIntegerForKey("kapai5num")+1)
-					print("kapai5num",cc.UserDefault:getInstance():getIntegerForKey("kapai5num"))
+				if back.isTouch then
+					return
 				end
+				local action = cc.OrbitCamera:create(0.3,1,0,0,90,0,5)
+				local action2 = cc.OrbitCamera:create(0.75,1,0,90,180,5,-10)
+				local action3 = cc.OrbitCamera:create(0.4,1,0,270,90,-5,5)
+				local action4 = cc.OrbitCamera:create(0.65,1,0,360,90,0,5)
+				local action5 = cc.EaseElasticOut:create(cc.OrbitCamera:create(1.5,1,0,450,90,5,-5),0.6) 
+				back.isTouch = true
+				back.isBack = true
+				local str_a = "AwardScene/back.png"
+				local str_b = "AwardScene/kapai"..ran..".png"
+				local cardChange =  function ()
+					if not back.isBack then
+						back.isBack = true
+						local cache = cc.Director:getInstance():getTextureCache():addImage(str_a) 
+						back:setTexture(cache)
+						
+					else
+						local cache = cc.Director:getInstance():getTextureCache():addImage(str_b) 
+						back.isBack = false
+						back:setTexture(cache)
+					end
+				end
+				local seq1 = cc.Sequence:create(
+					action,
+					cc.CallFunc:create (cardChange),
+					action2,
+					cc.CallFunc:create (cardChange),
+					action3,
+					action4,
+					cc.CallFunc:create (cardChange),
+					action5
+					)
+				back:runAction(seq1)
+
+				local str = string.format("kapai%dnum", ran)
+				cc.UserDefault:getInstance():setIntegerForKey(str, cc.UserDefault:getInstance():getIntegerForKey(str)+1)
+				print(str,cc.UserDefault:getInstance():getIntegerForKey(str))
+
 				return true
 			end
 		end)
     end
 end
+
+
 
 function AwardScene:onEnter()
 

@@ -19,7 +19,7 @@
   <object id="8" name="tag2" x="221" y="211" width="13" height="13"/>
   <object id="9" name="tag3" x="605" y="211" width="13" height="13"/>
   <object id="10" name="tag4" x="605" y="339" width="13" height="13"/>
-  <object id="11" name="begin" x="925" y="339" width="13" height="13"/>
+  <object id="11" name="begin" x="925" y="345" width="13" height="13"/>
  </objectgroup>
  <layer name="showLayer" width="15" height="10">
   <data encoding="base64" compression="zlib">

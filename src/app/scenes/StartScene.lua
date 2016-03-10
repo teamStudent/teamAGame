@@ -103,28 +103,36 @@ end
 -- 创建数据初始化方法
 function StartScene:initData()
 
-	if cc.UserDefault:getInstance():getBoolForKey("isSet")==false then
+	if cc.UserDefault:getInstance():getBoolForKey("isSet")== false then
 		-- 创建存储本地的时间，对后面的签到进行判断
-		local date = os.date("%d")
-		local month = os.date("%m")
-		local year = os.date("%Y")
+		-- local date = os.date("%d")
+		-- local month = os.date("%m")
+		-- local year = os.date("%Y")
+		local time = 
+		{
+			{charKey = "date"	,value =  -1				},
+			{charKey = "month"	,value =  os.date("%m")		},
+			{charKey = "year"	,value =  os.date("%Y")		}
+		}
+		for k,v in pairs(time) do
+			cc.UserDefault:getInstance():setIntegerForKey(v.charKey, v.value)
+			print("date",cc.UserDefault:getInstance():getIntegerForKey(v.charKey))
+		end
 		
-		cc.UserDefault:getInstance():setIntegerForKey("date", -1)
-		print("date",cc.UserDefault:getInstance():getIntegerForKey("date"))
-		cc.UserDefault:getInstance():setIntegerForKey("month",month)
-		print("month",cc.UserDefault:getInstance():getIntegerForKey("month"))
-		cc.UserDefault:getInstance():setIntegerForKey("year",year)
-		print("year",cc.UserDefault:getInstance():getIntegerForKey("year"))
+		-- cc.UserDefault:getInstance():setIntegerForKey("date", -1)
+		-- print("date",cc.UserDefault:getInstance():getIntegerForKey("date"))
+		-- cc.UserDefault:getInstance():setIntegerForKey("month",month)
+		-- print("month",cc.UserDefault:getInstance():getIntegerForKey("month"))
+		-- cc.UserDefault:getInstance():setIntegerForKey("year",year)
+		-- print("year",cc.UserDefault:getInstance():getIntegerForKey("year"))
 
 		cc.UserDefault:getInstance():setBoolForKey("isSet",true)
 		--添加是否为第一次签到的数据存储
 		-- cc.UserDefault:getInstance():setBoolForKey("isAward", false)
 		--不同卡牌类型数目的初始化
-		cc.UserDefault:getInstance():setIntegerForKey("kapai1num", 0)
-		cc.UserDefault:getInstance():setIntegerForKey("kapai2num", 0)
-		cc.UserDefault:getInstance():setIntegerForKey("kapai3num", 0)
-		cc.UserDefault:getInstance():setIntegerForKey("kapai4num", 0)
-		cc.UserDefault:getInstance():setIntegerForKey("kapai5num", 0)
+		for i=1,4 do
+			cc.UserDefault:getInstance():setIntegerForKey("kapai"..i.."num", 0)
+		end
 	end
 end
 

@@ -1,8 +1,2 @@
 # teamAGame
-Author: 李德志
-Author: 覃佳
-Author: 刘夏
-Author: 李晓俊
-Author: 桂炼
-Author: 张振
-Author: 李钊
+Author: 李德志，覃佳，刘夏，李晓俊，桂炼，张振，李钊

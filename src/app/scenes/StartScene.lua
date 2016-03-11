@@ -11,6 +11,7 @@ function StartScene:ctor(  )
 end
 
 function StartScene:init()
+	self:initData()
 	local bg = display.newSprite("StartScene/bg.png")
 	local scaleX = display.width/bg:getContentSize().width
 	local scaleY = display.height/bg:getContentSize().height
@@ -19,7 +20,7 @@ function StartScene:init()
 	self:addChild(bg)
 
 
-    
+    -- 开始按钮
 	self._startButton = cc.ui.UIPushButton.new({normal="StartScene/play.png"},{scale9=true})
 	                   :onButtonClicked(function(event)
                    	   display.replaceScene(SelectScene.new())
@@ -27,12 +28,43 @@ function StartScene:init()
                        :pos(display.cx, display.cy-30)
                        :addTo(self)
                        :setScale(1.5)
-
+    -- 签到按钮
     self._awardButton = cc.ui.UIPushButton.new({normal="StartScene/award1.png",pressed="StartScene/award2.png"},{scale9=true})
      					:onButtonClicked(function(event)
-     					display.replaceScene(AwardScene.new(),"pageTurn",1.2)
+     					-- display.replaceScene(AwardScene.new(),"pageTurn",1.2)
+     						local date = os.date("%d")
+							local month = os.date("%m")
+							local year = os.date("%Y")
+							print(tonumber(date))
+     					if 	 tonumber(date)~=cc.UserDefault:getInstance():getIntegerForKey("date") then
+     							cc.UserDefault:getInstance():setIntegerForKey("date",date)
+     							display.replaceScene(AwardScene.new(),"pageTurn",1.2)
+     				    else 
+     	-- 	-- 		    	if  tonumber(month)~=cc.UserDefault:getInstance():getIntegerForKey("month") then
+     	-- 	-- 					cc.UserDefault:getInstance():setIntegerForKey("date",date)
+     	-- 	-- 					display.replaceScene(AwardScene.new(),"pageTurn",1.2)
+						-- 	-- else
+						-- 	-- 	if  tonumber(year)~=cc.UserDefault:getInstance():getIntegerForKey("year") then
+     	-- 	-- 					cc.UserDefault:getInstance():setIntegerForKey("year",date)
+     	-- 	-- 					display.replaceScene(AwardScene.new(),"pageTurn",1.2)
+						
+						-- 	-- 	end
+						-- 	-- end
+							local label = display.newTTFLabel({
+								text="You have awarded today !",
+								font="Marker Felt",
+								size=30,
+								align=cc.TEXT_ALIGNMENT_CENTER
+								})
+							label:enableShadow();
+							label:setPosition(display.cx-10, display.cy-210)
+							self:addChild(label)
+							local seq=cc.Sequence:create(cc.DelayTime:create(1.5),
+							  cc.FadeOut:create(2))
+							label:runAction(seq)
+						end		
      					end)
-     					:pos(display.cx-10, display.cy-140)
+     					:pos(display.cx-10, display.cy-170)
      					:addTo(self)
      					:setScale(0.9)
     self.shopButton=cc.ui.UIPushButton.new({normal="store_up.png",pressed="store_down.png"}, {scale9=true})
@@ -69,6 +101,41 @@ function StartScene:init()
 	music:setButtonSelected(true)
 	music:addTo(self)
 
+end
+-- 创建数据初始化方法
+function StartScene:initData()
+
+	if cc.UserDefault:getInstance():getBoolForKey("isSet")== false then
+		-- 创建存储本地的时间，对后面的签到进行判断
+		-- local date = os.date("%d")
+		-- local month = os.date("%m")
+		-- local year = os.date("%Y")
+		local time = 
+		{
+			{charKey = "date"	,value =  -1				},
+			{charKey = "month"	,value =  os.date("%m")		},
+			{charKey = "year"	,value =  os.date("%Y")		}
+		}
+		for k,v in pairs(time) do
+			cc.UserDefault:getInstance():setIntegerForKey(v.charKey, v.value)
+			print("date",cc.UserDefault:getInstance():getIntegerForKey(v.charKey))
+		end
+		
+		-- cc.UserDefault:getInstance():setIntegerForKey("date", -1)
+		-- print("date",cc.UserDefault:getInstance():getIntegerForKey("date"))
+		-- cc.UserDefault:getInstance():setIntegerForKey("month",month)
+		-- print("month",cc.UserDefault:getInstance():getIntegerForKey("month"))
+		-- cc.UserDefault:getInstance():setIntegerForKey("year",year)
+		-- print("year",cc.UserDefault:getInstance():getIntegerForKey("year"))
+
+		cc.UserDefault:getInstance():setBoolForKey("isSet",true)
+		--添加是否为第一次签到的数据存储
+		-- cc.UserDefault:getInstance():setBoolForKey("isAward", false)
+		--不同卡牌类型数目的初始化
+		for i=1,4 do
+			cc.UserDefault:getInstance():setIntegerForKey("kapai"..i.."num", 0)
+		end
+	end
 end
 
 function StartScene:onEnter()

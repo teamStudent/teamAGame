@@ -320,7 +320,7 @@ function GameScene:testTouch()
     money1:addTo(self.tileMap)
       --显示需要金币的数量
      cc.ui.UILabel.new({
-      text = "80",
+      text = "金".."80",
       color = cc.c3b(250, 250, 5),
       size = 15,
     })
@@ -381,7 +381,7 @@ function GameScene:testTouch()
     money2:addTo(self.tileMap)
       --显示需要金币的数量
      cc.ui.UILabel.new({
-      text = "100",
+      text = "木".."100",
       color = cc.c3b(250, 250, 5),
       size = 15,
     })
@@ -444,7 +444,7 @@ function GameScene:testTouch()
     money3:addTo(self.tileMap)
       --显示需要金币的数量
      cc.ui.UILabel.new({
-      text = "120",
+      text = "水".."120",
       color = cc.c3b(250, 250, 5),
       size = 15,
     })
@@ -505,7 +505,7 @@ function GameScene:testTouch()
     money4:addTo(self.tileMap)
       --显示需要金币的数量
      cc.ui.UILabel.new({
-      text = "200",
+      text = "火".."200",
       color = cc.c3b(250, 250, 5),
       size = 15,
     })
@@ -566,7 +566,7 @@ function GameScene:testTouch()
     money5:addTo(self.tileMap)
       --显示需要金币的数量
      cc.ui.UILabel.new({
-      text = "300",
+      text = "土".."300",
       color = cc.c3b(250, 250, 5),
       size = 15,
     })
@@ -1300,7 +1300,15 @@ function GameScene:removeUpdata()
 
                     if cc.rectIntersectsRect(rect2,rect1) then
 
-                        v.hp=v.hp-v1.firepower
+                        if v.yuansu == 2 then
+                          v.hp=v.hp-v1.firepower*2
+                          local particle = cc.ParticleSystemQuad:create("GameScene/bomb.plist")
+                          particle:pos(v:getPositionX(), v:getPositionY())
+                          particle:addTo(self.tileMap,2)
+                        else
+                          v.hp=v.hp-v1.firepower
+                        end
+
                         v.life:setScaleX(v.hp/v.old_life)
                         v1:removeFromParent()
                         v1=nil
@@ -1399,6 +1407,8 @@ function GameScene:removeUpdata()
     end
     self.remove= scheduler.scheduleGlobal(handler(self, remove_nomove),0.01)
 end
+
+
 
 function GameScene:newRect2(v)
     if v==nil then

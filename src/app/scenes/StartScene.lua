@@ -35,6 +35,13 @@ function StartScene:init()
      					:pos(display.cx-10, display.cy-140)
      					:addTo(self)
      					:setScale(0.9)
+    self.shopButton=cc.ui.UIPushButton.new({normal="store_up.png",pressed="store_down.png"}, {scale9=true})
+                        :onButtonClicked(function(event)
+                        display.replaceScene(ShopScene.new(),"FadeTR",1.2)
+                        	end)
+                        :pos(display.cx-10, display.cy-200)
+                        :addTo(self)
+                        :setScale(0.7)
 
     --成就按钮
     self._startButton = cc.ui.UIPushButton.new({normal="chengJiu.jpg"},{scale9=true})
@@ -43,7 +50,6 @@ function StartScene:init()
                        end)
                        :pos(display.cx, display.cy-90)
                        :addTo(self)
-                       -- :setScale(1.5)
                        
 
 	

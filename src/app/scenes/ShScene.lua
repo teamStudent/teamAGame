@@ -17,16 +17,9 @@ function ShScene:init()
 	Shnumber=ShData.getShNum()
 	totalNumber2=Data2.SCENE2[Shnumber].number
 	self.money=Data2.SCENE2[Shnumber].money
-	-- if Shnumber==1 then
-	-- 	print("jl")
-	-- 	else if Shnumber==2 then
-	-- 		print("sz")
-	-- 	else
-	-- 		print("bsz")
-	-- 	end
-	-- end
 
 	 local map1="map/"..Shnumber.."-".."map"..".tmx"
+     print("MAP",map1)
 	 self.monsterNumber=0 --怪物数
 	 self.number=0 --波束
 	 self.killEnermyNumber=0 -- 杀敌数
@@ -44,13 +37,17 @@ function ShScene:init()
 	 self.wuqi3Point=self.hero:getObject("wuqi3")
 	 self.wuqi4Point=self.hero:getObject("wuqi4")
 	 self.wuqi5Point=self.hero:getObject("wuqi5")
+   self.wuqi6Point=self.hero:getObject("wuqi6")
+   self.wuqi7Point=self.hero:getObject("wuqi7")
+   self.wuqi8Point=self.hero:getObject("wuqi8")
+   self.wuqi9Point=self.hero:getObject("wuqi9")
+
 
 
 	 local rain=cc.ParticleRain:createWithTotalParticles(2000)
 	 rain:pos(display.cx, display.top)
 	 rain:addTo(self.tiledMap)
 	 
-
 	 local moneySp=display.newSprite("GameScene/money.png")
      moneySp:pos(display.left+150, display.top-23)
      moneySp:setScale(0.8)
@@ -93,6 +90,7 @@ function ShScene:init()
      local stopBtn = cc.ui.UIPushButton.new({normal = "GameScene/stopBtn.png"}, {scale9 = true})
      stopBtn:onButtonClicked(function(event)
      cc.Director:getInstance():pause()
+      scheduler.unscheduleGlobal(self.remove)
      local stopLayer = StopLayer.new()
      stopLayer:setPosition(cc.p(0,0))
      self:addChild(stopLayer,3)
@@ -439,7 +437,7 @@ local money1 = display.newSprite("GameScene/money.png")
     showWuqi1:pos(self.wuqi1Point.x, self.wuqi1Point.y)
     showWuqi1:addTo(self.tiledMap,2)
     local wuqi1 = display.newSprite("GameScene/wuqi1.png")
-    wuqi1:setScale(0.8)
+    wuqi1:setScale(0.4)
     wuqi1:pos(showWuqi1:getContentSize().width/2,showWuqi1:getContentSize().height/2)
     wuqi1:addTo(showWuqi1)
     wuqi1:setTouchEnabled(true)
@@ -882,6 +880,7 @@ local function attackEnermy()
 end
 
 function ShScene:removeUpdata()
+    
 local function remove_nomove()
         for k,v in pairs(self.monster) do
           local rect1= v:getBoundingBox()
@@ -955,10 +954,11 @@ local function remove_nomove()
                 self.monster[i]:removeFromParent()
                 table.remove(self.monster,i)
 
+
                 math.randomseed(os.time())
                 local time = math.random()
                 print("time",time)
-                if time<=0.02 then
+                if time<=1 then
                    local sp=display.newSprite("tree.png")
                    sp:pos(display.width/2, display.height/2)
                    sp:setScale(0.5)

@@ -57,7 +57,6 @@ function ChooseLayer:init()
 	:setScale(0.3)
     :addTo(anode)
 
-    print(ret)
 
 	jlItem:runAction(
 			cc.MoveTo:create(0.5,cc.p(display.width-50,display.height-130))

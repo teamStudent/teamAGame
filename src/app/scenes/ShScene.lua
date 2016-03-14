@@ -726,11 +726,12 @@ local money1 = display.newSprite("GameScene/money.png")
     showWuqi6:pos(self.wuqi6Point.x, self.wuqi6Point.y)
     showWuqi6:addTo(self.tiledMap,2)
     local wuqi6 = cc.Sprite:create("yilidanTD.png")
-    wuqi5:pos(showWuqi6:getContentSize().width/2,showWuqi6:getContentSize().height/2)
-    wuqi5:addTo(showWuqi6)
-    wuqi5:setTouchEnabled(true)
-    wuqi5:setTouchSwallowEnabled(false)
-    wuqi5:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)   
+    wuqi6:pos(showWuqi6:getContentSize().width/2,showWuqi6:getContentSize().height/2)
+    wuqi6:addTo(showWuqi6)
+    wuqi6:setScale(0.4)
+    wuqi6:setTouchEnabled(true)
+    wuqi6:setTouchSwallowEnabled(false)
+    wuqi6:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)   
         if event.name=="began" then
             self.showLayer:show()
             self.addSp=Wuqi_jl6.new()
@@ -866,6 +867,25 @@ function ShScene:attack(v1,v)
         bullet:setScale(0.6)
         bullet.isMove=true
         bullet:setPosition(v1:getPositionX(),v1:getPositionY())
+        bullet:addTo(self.tiledMap,3)  
+        bullet:runAction(seq)
+
+    elseif v1:getTag()==100 then
+        -- local rotate=cc.RotateTo:create(0.01,self:angle(v1,v)+180)
+        -- v1:runAction(rotate)
+        bullet = Bullet_jl6.new()
+        bullet:setAnchorPoint(cc.p(0.5,0.5))
+        bullet:setRotation(v1:getRotation())
+        bullet:setPosition(v1:getPositionX(),v1:getPositionY())
+        local move=cc.MoveTo:create(0.2,cc.p(v:getPositionX(),v:getPositionY()))
+        local func = cc.CallFunc:create(function (bullet)    
+
+        self.bullet[#self.bullet+1]=bullet
+        bullet.isMove=false
+        end)
+        local seq = cc.Sequence:create(move,func) 
+        bullet.isMove=true
+        bullet.firepower=v1.firepower
         bullet:addTo(self.tiledMap,3)  
         bullet:runAction(seq)
         bullet.firepower=v1.firepower 

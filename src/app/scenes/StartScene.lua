@@ -11,41 +11,40 @@ function StartScene:ctor(  )
 end
 
 function StartScene:init()
-<<<<<<< HEAD
+
 	local bg = display.newSprite("StartScene/startbg.png")
-=======
+
 	self:initData()
 	local bg = display.newSprite("StartScene/bg.png")
->>>>>>> 571619ad17afc7fd6f8c0385c4b08f33ed8e9df9
+
 	local scaleX = display.width/bg:getContentSize().width
 	local scaleY = display.height/bg:getContentSize().height
 	bg:setScale(scaleX,scaleY)
 	bg:setPosition(cc.p(display.cx,display.cy))
 	self:addChild(bg)
 
-<<<<<<< HEAD
+
 	-- local bb = Enermy:new()
 	-- bb:setPosition(100,100)
 	-- self:addChild(bb, 3)
 
-<<<<<<< HEAD
+
     
 	self._startButton = cc.ui.UIPushButton.new({normal="StartScene/Up.png"},{scale9=true})
-=======
-=======
->>>>>>> 118405cf137acd6165748ed2b355887822f12f58
+
+
 
     -- 开始按钮
 	self._startButton = cc.ui.UIPushButton.new({normal="StartScene/play.png"},{scale9=true})
->>>>>>> 571619ad17afc7fd6f8c0385c4b08f33ed8e9df9
+
 	                   :onButtonClicked(function(event)
                    	   display.replaceScene(SelectScene.new())
                        end)
                        :pos(display.cx, display.cy-30)
                        :addTo(self)
-<<<<<<< HEAD
+
                        :setScale(1.0)
-=======
+
                        :setScale(1.5)
     -- 签到按钮
     self._awardButton = cc.ui.UIPushButton.new({normal="StartScene/award1.png",pressed="StartScene/award2.png"},{scale9=true})
@@ -101,11 +100,9 @@ function StartScene:init()
                        end)
                        :pos(display.cx, display.cy-90)
                        :addTo(self)
-<<<<<<< HEAD
+
                        -- :setScale(1.5)
->>>>>>> 571619ad17afc7fd6f8c0385c4b08f33ed8e9df9
-=======
->>>>>>> 118405cf137acd6165748ed2b355887822f12f58
+
                        
       local tittl=display.newSprite("StartScene/selectplane_plane3_title.png")
         tittl:setScale(2.0)

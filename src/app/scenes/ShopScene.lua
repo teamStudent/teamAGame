@@ -11,6 +11,10 @@ function ShopScene:ctor()
 end
 
 function ShopScene:init()
+
+	local tb = Data3.LOCK
+
+
 	local bg=display.newSprite("bg.png")
 	bg:pos(display.width/2, display.height/2)
 	bg:addTo(self)
@@ -64,6 +68,14 @@ function ShopScene:init()
 
 
 	for i=1,6 do
+	if Data3.LOCK[ShData.getShNum()][i].lock==0 then
+		print("jlLock",Data3.LOCK[ShData.getShNum()][i].lock)
+		local jlspr = display.newSprite(Data2.getSpData(i).pic)
+		jlspr:setPosition(cc.p((display.left+display.cx)/2-50+(i-1)*display.cx*2/3, display.cy+100))
+		jlspr:setScale(0.4)
+		jlspr:addTo(self.scall)
+	else
+		print("jlLock",Data3.LOCK[ShData.getShNum()][i].lock)
 		local jlsp=cc.ui.UIPushButton.new({normal=Data2.getSpData(i).pic},{scale9=true})
 		jlsp:onButtonClicked(function()
 			ShData.setjlTDnumber(i)
@@ -78,6 +90,7 @@ function ShopScene:init()
 		jlsp:setPosition(cc.p((display.left+display.cx)/2-50+(i-1)*display.cx*2/3, display.cy+100))
 		jlsp:setScale(0.4)
 		jlsp:addTo(self.scall)
+	end
 	end
 
 

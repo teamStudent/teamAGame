@@ -64,6 +64,7 @@ function NewTDLayer:init()
 	local TDsure=cc.ui.UIPushButton.new({normal="NewTDLayer/okItem1.png",pressed="NewTDLayer/okItem2.png"}, {scale9=true})
 			:onButtonClicked(function()
 			 self:Buy()
+
 				end)
 			:pos(display.cx, display.cy-bg:getContentSize().height/2+50)
 			:setScale(0.5)
@@ -153,14 +154,21 @@ function NewTDLayer:Buy()
 			cc.UserDefault:getInstance():setIntegerForKey("TREE",cc.UserDefault:getInstance():getIntegerForKey("TREE")-v.name)
 			local user=cc.UserDefault:getInstance():getIntegerForKey("TREE")
 			tree_label:setString(user)
-		else
+			Data3.LOCK[ShData.getShNum()][k].lock=0
+			self:removeSelf()
+			cc.Director:getInstance():replaceScene(StartScene.new())
+		end
 
+		if (ShData.getjlTDnumber() or ShData.getszTDnumber() or ShData.getbsTDnumber())==k and cc.UserDefault:getInstance():getIntegerForKey("TREE")-v.name<0 then
+			local over=Defult.new()
+			over:setPosition(cc.p(0,0))
+			over:addTo(self)
 		end
 	end
 
-		local over=Defult.new()
-		over:setPosition(cc.p(0,0))
-		over:addTo(self)
+		-- local over=Defult.new()
+		-- over:setPosition(cc.p(0,0))
+		-- over:addTo(self)
 end
 
 

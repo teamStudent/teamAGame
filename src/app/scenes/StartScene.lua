@@ -89,7 +89,7 @@ function StartScene:init()
                         :onButtonClicked(function(event)
                         display.replaceScene(ShopScene.new(),"FadeTR",1.2)
                         	end)
-                        :pos(display.cx-10, display.cy-200)
+                        :pos(display.cx-10, display.cy-250)
                         :addTo(self)
                         :setScale(0.7)
 

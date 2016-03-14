@@ -866,13 +866,12 @@ function ShScene:attack(v1,v)
        local seq = cc.Sequence:create(move,func) 
         bullet:setScale(0.6)
         bullet.isMove=true
+        bullet.firepower=v1.firepower 
         bullet:setPosition(v1:getPositionX(),v1:getPositionY())
         bullet:addTo(self.tiledMap,3)  
         bullet:runAction(seq)
 
     elseif v1:getTag()==100 then
-        -- local rotate=cc.RotateTo:create(0.01,self:angle(v1,v)+180)
-        -- v1:runAction(rotate)
         bullet = Bullet_jl6.new()
         bullet:setAnchorPoint(cc.p(0.5,0.5))
         bullet:setRotation(v1:getRotation())
@@ -888,7 +887,6 @@ function ShScene:attack(v1,v)
         bullet.firepower=v1.firepower
         bullet:addTo(self.tiledMap,3)  
         bullet:runAction(seq)
-        bullet.firepower=v1.firepower 
   end
     
 end
@@ -1035,7 +1033,7 @@ local function remove_nomove()
                    local dz=cc.MoveTo:create(0.5,cc.p(display.left+30, display.top-23))
                    local sc=cc.ScaleTo:create(0.5,0)
                    local ca=cc.CallFunc:create(function()
-                   cc.UserDefault:getInstance():setIntegerForKey("TREE",cc.UserDefault:getInstance():getIntegerForKey("TREE")+1)
+                   cc.UserDefault:getInstance():setIntegerForKey("TREE",cc.UserDefault:getInstance():getIntegerForKey("TREE")+100)
                    local num = cc.UserDefault:getInstance():getIntegerForKey("TREE")
                    self.treeLabel:setString(num)
                    end)

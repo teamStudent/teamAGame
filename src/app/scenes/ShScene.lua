@@ -840,6 +840,9 @@ function ShScene:newRect(v)
 end
 
 function ShScene:updata()
+  if self.cannon == nil then
+  self.cannon = {}
+end
 local function attackEnermy()
         for k1,v1 in pairs(self.cannon) do
             for k,v in pairs(self.monster) do

@@ -1,5 +1,5 @@
 --[[
-   游戏主场景
+   成就场景
 
 ]]
 
@@ -19,8 +19,6 @@ function AchieveScene:ctor()
 end
 
 function AchieveScene:init()
-	
-
 	--背景
 	local bg = display.newSprite("bg222.jpg")
   	bg:pos(display.cx, display.cy)
@@ -79,69 +77,28 @@ function AchieveScene:init()
   	self.shuzhi:setPosition(cc.p(0,(i-1)*display.height/8))
 
   	--目标
-  	local mubiao
-  	if i==1 then
-  		mubiao=cc.ui.UILabel.new({
-      	text ="目标：杀死600个怪物",
-      	color = cc.c3b(250, 250, 5),
-      	size = 32,
-    })
-  	self._scroll2:addChild(mubiao)
-  	mubiao:setAnchorPoint(cc.p(0,0))
-  	mubiao:setPosition(cc.p(display.width/8,display.height/16+(i-1)*display.height/8))	
-  	end
-  	if i==2 then
-  		mubiao=cc.ui.UILabel.new({
-      	text ="目标：杀死500个怪物",
-      	color = cc.c3b(250, 250, 5),
-      	size = 32,
-    })
-  		self._scroll2:addChild(mubiao)
-  	mubiao:setAnchorPoint(cc.p(0,0))
-  	mubiao:setPosition(cc.p(display.width/8,display.height/16+(i-1)*display.height/8))
-  	end
-  	if i==3 then
-  		mubiao=cc.ui.UILabel.new({
-      	text ="目标：杀死400个怪物",
-      	color = cc.c3b(250, 250, 5),
-      	size = 32,
-    })
-  		self._scroll2:addChild(mubiao)
-  	mubiao:setAnchorPoint(cc.p(0,0))
-  	mubiao:setPosition(cc.p(display.width/8,display.height/16+(i-1)*display.height/8))
-  	end
-  	if i==4 then
-  		mubiao=cc.ui.UILabel.new({
-      	text ="目标：杀死300个怪物",
-      	color = cc.c3b(250, 250, 5),
-      	size = 32,
-    })
-  		self._scroll2:addChild(mubiao)
-  	mubiao:setAnchorPoint(cc.p(0,0))
-  	mubiao:setPosition(cc.p(display.width/8,display.height/16+(i-1)*display.height/8))
-  	end
-  	if i==5 then
-  		mubiao=cc.ui.UILabel.new({
-      	text ="目标：杀死200个怪物",
-      	color = cc.c3b(250, 250, 5),
-      	size = 32,
-    })
-  		self._scroll2:addChild(mubiao)
-  	mubiao:setAnchorPoint(cc.p(0,0))
-  	mubiao:setPosition(cc.p(display.width/8,display.height/16+(i-1)*display.height/8))
-  	end
-  	if i==6 then
-  		mubiao=cc.ui.UILabel.new({
-      	text ="目标：杀死100个怪物",
-      	color = cc.c3b(250, 250, 5),
-      	size = 32,
-    })
-  		self._scroll2:addChild(mubiao)
-  	mubiao:setAnchorPoint(cc.p(0,0))
-  	mubiao:setPosition(cc.p(display.width/8,display.height/16+(i-1)*display.height/8))
-  	end
-  	
+    local target_table = {
+    {text ="目标：杀死600个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
+    {text ="目标：杀死500个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
+    {text ="目标：杀死400个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
+    {text ="目标：杀死300个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
+    {text ="目标：杀死200个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
+    {text ="目标：杀死100个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
+  }
 
+  	local mubiao
+    for k,v in pairs( target_table ) do
+      if k == i then
+        mubiao=cc.ui.UILabel.new({
+        text =v.text,
+        color = v.color,
+        size = v.size,
+        }) 
+        self._scroll2:addChild(mubiao)
+        mubiao:setAnchorPoint(cc.p(0,0))
+        mubiao:setPosition(cc.p(display.width/8,display.height/16+(i-1)*display.height/8))  
+      end
+    end
 	end
 end
 

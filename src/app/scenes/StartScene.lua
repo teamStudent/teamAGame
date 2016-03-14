@@ -23,6 +23,7 @@ function StartScene:init()
 	bg:setPosition(cc.p(display.cx,display.cy))
 	self:addChild(bg)
 
+<<<<<<< HEAD
 	-- local bb = Enermy:new()
 	-- bb:setPosition(100,100)
 	-- self:addChild(bb, 3)
@@ -31,6 +32,8 @@ function StartScene:init()
     
 	self._startButton = cc.ui.UIPushButton.new({normal="StartScene/Up.png"},{scale9=true})
 =======
+=======
+>>>>>>> 118405cf137acd6165748ed2b355887822f12f58
 
     -- 开始按钮
 	self._startButton = cc.ui.UIPushButton.new({normal="StartScene/play.png"},{scale9=true})
@@ -83,6 +86,13 @@ function StartScene:init()
      					:pos(display.cx-10, display.cy-170)
      					:addTo(self)
      					:setScale(0.9)
+    self.shopButton=cc.ui.UIPushButton.new({normal="store_up.png",pressed="store_down.png"}, {scale9=true})
+                        :onButtonClicked(function(event)
+                        display.replaceScene(ShopScene.new(),"FadeTR",1.2)
+                        	end)
+                        :pos(display.cx-10, display.cy-200)
+                        :addTo(self)
+                        :setScale(0.7)
 
     --成就按钮
     self._startButton = cc.ui.UIPushButton.new({normal="chengJiu.jpg"},{scale9=true})
@@ -91,8 +101,11 @@ function StartScene:init()
                        end)
                        :pos(display.cx, display.cy-90)
                        :addTo(self)
+<<<<<<< HEAD
                        -- :setScale(1.5)
 >>>>>>> 571619ad17afc7fd6f8c0385c4b08f33ed8e9df9
+=======
+>>>>>>> 118405cf137acd6165748ed2b355887822f12f58
                        
       local tittl=display.newSprite("StartScene/selectplane_plane3_title.png")
         tittl:setScale(2.0)

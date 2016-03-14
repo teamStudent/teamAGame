@@ -78,13 +78,13 @@ function AchieveScene:init()
 
   	--目标
     local target_table = {
-    {text ="目标：杀死600个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
-    {text ="目标：杀死500个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
-    {text ="目标：杀死400个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
-    {text ="目标：杀死300个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
-    {text ="目标：杀死200个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
-    {text ="目标：杀死100个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
-  }
+      {text ="目标：杀死600个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
+      {text ="目标：杀死500个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
+      {text ="目标：杀死400个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
+      {text ="目标：杀死300个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
+      {text ="目标：杀死200个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
+      {text ="目标：杀死100个怪物"  ,color = cc.c3b(250, 250, 5)  ,size = 32},
+    }
 
   	local mubiao
     for k,v in pairs( target_table ) do

@@ -721,6 +721,51 @@ local money1 = display.newSprite("GameScene/money.png")
             self.moneyNumLabel:setString(self.money)
         end       
     end)
+
+    local showWuqi6=display.newSprite("GameScene/showWuqi.png")
+    showWuqi6:pos(self.wuqi6Point.x, self.wuqi6Point.y)
+    showWuqi6:addTo(self.tiledMap,2)
+    local wuqi6 = cc.Sprite:create("yilidanTD.png")
+    wuqi5:pos(showWuqi6:getContentSize().width/2,showWuqi6:getContentSize().height/2)
+    wuqi5:addTo(showWuqi6)
+    wuqi5:setTouchEnabled(true)
+    wuqi5:setTouchSwallowEnabled(false)
+    wuqi5:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)   
+        if event.name=="began" then
+            self.showLayer:show()
+            self.addSp=Wuqi_jl6.new()
+            self.addSp:pos(event.x, event.y)
+            self.addSp:setAnchorPoint(cc.p(0.5,0.5))
+            self.addSp:addTo(self.tiledMap,2)
+            return true
+        elseif event.name=="moved" then
+           self.addSp:pos(event.x, event.y) 
+        elseif event.name=="ended" then
+            self.showLayer:hide()
+            local x= event.x/64
+            local y = (640-event.y)/64
+            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid<=0 then
+                self.addSp:removeFromParent()
+                return
+            end
+            for k,v in pairs(self.cannon) do
+                local rect1= self:newRect(v)
+                if cc.rectContainsPoint(rect1,cc.p(event.x,event.y)) then
+                    self.addSp:removeFromParent()
+                    return
+                end
+            end
+            if self.money-self.addSp.make<0 then
+                self.addSp:removeFromParent()
+                return
+            end
+            self.addSp:pos(math.floor(x)*64+32, math.floor(10-y)*64+32)
+            self.cannon[#self.cannon+1]=self.addSp
+            self.money=self.money-self.addSp.make
+            self.moneyNumLabel:setString(self.money)
+        end       
+    end)
 end
 
 function ShScene:attack(v1,v)

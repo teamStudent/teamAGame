@@ -11,8 +11,12 @@ function StartScene:ctor(  )
 end
 
 function StartScene:init()
+
+	local bg = display.newSprite("StartScene/startbg.png")
+
 	self:initData()
 	local bg = display.newSprite("StartScene/bg.png")
+
 	local scaleX = display.width/bg:getContentSize().width
 	local scaleY = display.height/bg:getContentSize().height
 	bg:setScale(scaleX,scaleY)
@@ -20,13 +24,27 @@ function StartScene:init()
 	self:addChild(bg)
 
 
+	-- local bb = Enermy:new()
+	-- bb:setPosition(100,100)
+	-- self:addChild(bb, 3)
+
+
+    
+	self._startButton = cc.ui.UIPushButton.new({normal="StartScene/Up.png"},{scale9=true})
+
+
+
     -- 开始按钮
 	self._startButton = cc.ui.UIPushButton.new({normal="StartScene/play.png"},{scale9=true})
+
 	                   :onButtonClicked(function(event)
                    	   display.replaceScene(SelectScene.new())
                        end)
                        :pos(display.cx, display.cy-30)
                        :addTo(self)
+
+                       :setScale(1.0)
+
                        :setScale(1.5)
     -- 签到按钮
     self._awardButton = cc.ui.UIPushButton.new({normal="StartScene/award1.png",pressed="StartScene/award2.png"},{scale9=true})
@@ -82,7 +100,19 @@ function StartScene:init()
                        end)
                        :pos(display.cx, display.cy-90)
                        :addTo(self)
+
+                       -- :setScale(1.5)
+
                        
+      local tittl=display.newSprite("StartScene/selectplane_plane3_title.png")
+        tittl:setScale(2.0)
+        :pos(display.cx,display.cy/2*3)
+        :addTo(self)
+
+        local move1=cc.MoveBy:create(0.5,cc.p(0,10))
+        local move2=cc.MoveBy:create(0.5,cc.p(0,-10))
+        local sequence1=cc.Sequence:create(move1,move2)
+        transition.execute(tittl,cc.RepeatForever:create(sequence1))
 
 	
 	local music = cc.ui.UICheckBoxButton.new({off ="sound_off.png" ,on = "sound_on.png"})

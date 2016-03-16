@@ -867,11 +867,15 @@ function GameScene:attack(v1,v)
         bullet:setPosition(v1:getPositionX(),v1:getPositionY())
         bullet:addTo(self.tileMap,3)  
         bullet:runAction(seq)
+        
         bullet.firepower=v1.firepower
+       
+        
         -- end   
   end
     
 end
+
 
 function GameScene:newRect(v)
     if v==nil then
@@ -1292,16 +1296,26 @@ end
 
 function GameScene:removeUpdata()
     local function remove_nomove()
+            
+              
         for k,v in pairs(self.monster) do
           local rect1= v:getBoundingBox()
           for k1,v1 in pairs(self.bullet) do
             if v1.tag==100 then
                     rect2=v1:getBoundingBox()
-
+                        
                     if cc.rectIntersectsRect(rect2,rect1) then
-
+                               mytime=os.time()
+                               mytime=string.reverse(mytime)    
+                               math.randomseed(os.time())
+    
+                               local  time =math.random(1,4)
+                               print(time)
+                             
                         if v.yuansu == 2 then
-                          v.hp=v.hp-v1.firepower*2
+                          
+                          v.hp=v.hp-v1.firepower-time*4
+                          
                           local particle = cc.ParticleSystemQuad:create("GameScene/bomb.plist")
                           particle:pos(v:getPositionX(), v:getPositionY())
                           particle:addTo(self.tileMap,2)
@@ -1317,7 +1331,7 @@ function GameScene:removeUpdata()
               elseif v1.tag==200 then
                     rect2=v1:getBoundingBox()
                     if cc.rectIntersectsRect(rect2,rect1) then
-                        v.hp=v.hp-v1.firepower
+                        v.hp=v.hp-v1.firepower-time*4
                         v.life:setScaleX(v.hp/v.old_life)
                         v1:removeFromParent()
                         v1=nil
@@ -1326,7 +1340,7 @@ function GameScene:removeUpdata()
                 elseif v1.tag==300 then
                     rect2=v1:getBoundingBox()
                     if cc.rectIntersectsRect(rect2,rect1) then
-                        v.hp=v.hp-v1.firepower
+                        v.hp=v.hp-v1.firepower-time*4
                         v.life:setScaleX(v.hp/v.old_life)
                         v1:removeFromParent()
                         v1=nil
@@ -1335,7 +1349,7 @@ function GameScene:removeUpdata()
                 elseif v1.tag==400 then
                     rect2=v1:getBoundingBox()
                     if cc.rectIntersectsRect(rect2,rect1) then
-                        v.hp=v.hp-v1.firepower
+                        v.hp=v.hp-v1.firepower-time*4
                         v.life:setScaleX(v.hp/v.old_life)
                         -- v1:stopAllActions()
                         v1:removeFromParent()
@@ -1345,7 +1359,7 @@ function GameScene:removeUpdata()
                 elseif v1.tag==500 then
                     rect2=v1:getBoundingBox()
                     if cc.rectIntersectsRect(rect2,rect1) then
-                        v.hp=v.hp-v1.firepower
+                        v.hp=v.hp-v1.firepower-time*4
                         v.life:setScaleX(v.hp/v.old_life)
                         table.remove(self.bullet,k1)
                         v1:removeFromParent()
@@ -1408,7 +1422,14 @@ function GameScene:removeUpdata()
     self.remove= scheduler.scheduleGlobal(handler(self, remove_nomove),0.01)
 end
 
+--[[function GameScene:zidan()
+    mytime=os.time()
+    mytime=string.reverse(mytime)    
+    math.randomseed(os.time())
+        s=math.random(1,5)
+      return s  
 
+end]]
 
 function GameScene:newRect2(v)
     if v==nil then

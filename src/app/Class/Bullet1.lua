@@ -10,4 +10,5 @@ function Bullet1:ctor()
 	self.firepower=10
 	self.isMove=false
 end
+
 return Bullet1

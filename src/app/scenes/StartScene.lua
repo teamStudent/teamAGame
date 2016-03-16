@@ -25,6 +25,7 @@ function StartScene:init()
 
 
 	-- local bb = Enermy:new()
+	
 	-- bb:setPosition(100,100)
 	-- self:addChild(bb, 3)
 

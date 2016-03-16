@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <userDefaultRoot>
     <JL>2</JL>
-    <TREE>34</TREE>
-    <isSet>true</isSet>
-    <date>9</date>
+    <TREE>61</TREE>
+    <date>14</date>
     <month>3</month>
     <year>2016</year>
-    <isAward>false</isAward>
-    <kapai1num>5</kapai1num>
-    <kapai2num>2</kapai2num>
-    <kapai3num>0</kapai3num>
-    <kapai4num>4</kapai4num>
-    <kapai5num>3</kapai5num>
+    <isSet>true</isSet>
+    <kapai1num>0</kapai1num>
+    <kapai2num>0</kapai2num>
+    <kapai3num>2</kapai3num>
+    <kapai4num>3</kapai4num>
 </userDefaultRoot>

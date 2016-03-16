@@ -699,6 +699,12 @@ function GameScene:attack(v1,v)
 --v1当前处理的加农炮
 --当前处理的敌人
 
+                               mytime1=os.time()
+                               mytime1=string.reverse(mytime1)    
+                               math.randomseed(os.time())
+    
+                               local  time1 =math.random(1,4)
+                               print(time1)
   if v1:getTag()==10 then
     local rotate=cc.RotateTo:create(0.01,self:angle(v1,v)+180)
     v1:runAction(rotate)
@@ -726,7 +732,8 @@ function GameScene:attack(v1,v)
     end)
     local seq = cc.Sequence:create(move,func) 
     bullet.isMove=true
-    bullet.firepower=v1.firepower 
+    bullet.firepower=v1.firepower+time1
+    print(bullet.firepower)
     bullet:runAction(seq)
 
   elseif v1:getTag()==20 then
@@ -751,7 +758,7 @@ function GameScene:attack(v1,v)
     end)
     seq = cc.Sequence:create(move,func) 
     bullet.isMove=true
-    bullet.firepower=v1.firepower
+    bullet.firepower=v1.firepower+time1
     bullet:addTo(self.tileMap,3)  
     bullet:runAction(seq)
 
@@ -778,7 +785,7 @@ function GameScene:attack(v1,v)
     end)
     local seq = cc.Sequence:create(move,func) 
     bullet.isMove=true
-    bullet.firepower=v1.firepower
+    bullet.firepower=v1.firepower+time1
     bullet:addTo(self.tileMap,3)  
     bullet:runAction(seq)
   elseif v1:getTag()==50 then
@@ -819,7 +826,7 @@ function GameScene:attack(v1,v)
 
     local seq = cc.Sequence:create(delay,func) 
     bullet.isMove=true
-    bullet.firepower=v1.firepower
+    bullet.firepower=v1.firepower+time1
     bullet:addTo(self.tileMap,3)  
     bullet:runAction(seq)
         
@@ -868,7 +875,7 @@ function GameScene:attack(v1,v)
         bullet:addTo(self.tileMap,3)  
         bullet:runAction(seq)
         
-        bullet.firepower=v1.firepower
+        bullet.firepower=v1.firepower+time1
        
         
         -- end   
@@ -1305,16 +1312,16 @@ function GameScene:removeUpdata()
                     rect2=v1:getBoundingBox()
                         
                     if cc.rectIntersectsRect(rect2,rect1) then
-                               mytime=os.time()
-                               mytime=string.reverse(mytime)    
-                               math.randomseed(os.time())
+                              -- mytime=os.time()
+                             --  mytime=string.reverse(mytime)    
+                            --   math.randomseed(os.time())
     
-                               local  time =math.random(1,4)
-                               print(time)
+                            --   local  time =math.random(1,4)
+                              
                              
                         if v.yuansu == 2 then
                           
-                          v.hp=v.hp-v1.firepower-time*4
+                          v.hp=v.hp-v1.firepower*2
                           
                           local particle = cc.ParticleSystemQuad:create("GameScene/bomb.plist")
                           particle:pos(v:getPositionX(), v:getPositionY())
@@ -1331,7 +1338,7 @@ function GameScene:removeUpdata()
               elseif v1.tag==200 then
                     rect2=v1:getBoundingBox()
                     if cc.rectIntersectsRect(rect2,rect1) then
-                        v.hp=v.hp-v1.firepower-time*4
+                        v.hp=v.hp-v1.firepower*2
                         v.life:setScaleX(v.hp/v.old_life)
                         v1:removeFromParent()
                         v1=nil
@@ -1340,7 +1347,7 @@ function GameScene:removeUpdata()
                 elseif v1.tag==300 then
                     rect2=v1:getBoundingBox()
                     if cc.rectIntersectsRect(rect2,rect1) then
-                        v.hp=v.hp-v1.firepower-time*4
+                        v.hp=v.hp-v1.firepower*2
                         v.life:setScaleX(v.hp/v.old_life)
                         v1:removeFromParent()
                         v1=nil
@@ -1349,7 +1356,7 @@ function GameScene:removeUpdata()
                 elseif v1.tag==400 then
                     rect2=v1:getBoundingBox()
                     if cc.rectIntersectsRect(rect2,rect1) then
-                        v.hp=v.hp-v1.firepower-time*4
+                        v.hp=v.hp-v1.firepower*2
                         v.life:setScaleX(v.hp/v.old_life)
                         -- v1:stopAllActions()
                         v1:removeFromParent()
@@ -1359,7 +1366,7 @@ function GameScene:removeUpdata()
                 elseif v1.tag==500 then
                     rect2=v1:getBoundingBox()
                     if cc.rectIntersectsRect(rect2,rect1) then
-                        v.hp=v.hp-v1.firepower-time*4
+                        v.hp=v.hp-v1.firepower*2
                         v.life:setScaleX(v.hp/v.old_life)
                         table.remove(self.bullet,k1)
                         v1:removeFromParent()

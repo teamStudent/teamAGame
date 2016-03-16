@@ -721,6 +721,52 @@ local money1 = display.newSprite("GameScene/money.png")
             self.moneyNumLabel:setString(self.money)
         end       
     end)
+
+    local showWuqi6=display.newSprite("GameScene/showWuqi.png")
+    showWuqi6:pos(self.wuqi6Point.x, self.wuqi6Point.y)
+    showWuqi6:addTo(self.tiledMap,2)
+    local wuqi6 = cc.Sprite:create("yilidanTD.png")
+    wuqi6:pos(showWuqi6:getContentSize().width/2,showWuqi6:getContentSize().height/2)
+    wuqi6:addTo(showWuqi6)
+    wuqi6:setScale(0.4)
+    wuqi6:setTouchEnabled(true)
+    wuqi6:setTouchSwallowEnabled(false)
+    wuqi6:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)   
+        if event.name=="began" then
+            self.showLayer:show()
+            self.addSp=Wuqi_jl6.new()
+            self.addSp:pos(event.x, event.y)
+            self.addSp:setAnchorPoint(cc.p(0.5,0.5))
+            self.addSp:addTo(self.tiledMap,2)
+            return true
+        elseif event.name=="moved" then
+           self.addSp:pos(event.x, event.y) 
+        elseif event.name=="ended" then
+            self.showLayer:hide()
+            local x= event.x/64
+            local y = (640-event.y)/64
+            local tileGid = self.showLayer:getTileGIDAt(cc.p(math.floor(x),math.floor(y)))
+            if tileGid<=0 then
+                self.addSp:removeFromParent()
+                return
+            end
+            for k,v in pairs(self.cannon) do
+                local rect1= self:newRect(v)
+                if cc.rectContainsPoint(rect1,cc.p(event.x,event.y)) then
+                    self.addSp:removeFromParent()
+                    return
+                end
+            end
+            if self.money-self.addSp.make<0 then
+                self.addSp:removeFromParent()
+                return
+            end
+            self.addSp:pos(math.floor(x)*64+32, math.floor(10-y)*64+32)
+            self.cannon[#self.cannon+1]=self.addSp
+            self.money=self.money-self.addSp.make
+            self.moneyNumLabel:setString(self.money)
+        end       
+    end)
 end
 
 function ShScene:attack(v1,v)
@@ -820,10 +866,27 @@ function ShScene:attack(v1,v)
        local seq = cc.Sequence:create(move,func) 
         bullet:setScale(0.6)
         bullet.isMove=true
+        bullet.firepower=v1.firepower 
         bullet:setPosition(v1:getPositionX(),v1:getPositionY())
         bullet:addTo(self.tiledMap,3)  
         bullet:runAction(seq)
-        bullet.firepower=v1.firepower 
+
+    elseif v1:getTag()==100 then
+        bullet = Bullet_jl6.new()
+        bullet:setAnchorPoint(cc.p(0.5,0.5))
+        bullet:setRotation(v1:getRotation())
+        bullet:setPosition(v1:getPositionX(),v1:getPositionY())
+        local move=cc.MoveTo:create(0.2,cc.p(v:getPositionX(),v:getPositionY()))
+        local func = cc.CallFunc:create(function (bullet)    
+
+        self.bullet[#self.bullet+1]=bullet
+        bullet.isMove=false
+        end)
+        local seq = cc.Sequence:create(move,func) 
+        bullet.isMove=true
+        bullet.firepower=v1.firepower
+        bullet:addTo(self.tiledMap,3)  
+        bullet:runAction(seq)
   end
     
 end
@@ -970,7 +1033,7 @@ local function remove_nomove()
                    local dz=cc.MoveTo:create(0.5,cc.p(display.left+30, display.top-23))
                    local sc=cc.ScaleTo:create(0.5,0)
                    local ca=cc.CallFunc:create(function()
-                   cc.UserDefault:getInstance():setIntegerForKey("TREE",cc.UserDefault:getInstance():getIntegerForKey("TREE")+1)
+                   cc.UserDefault:getInstance():setIntegerForKey("TREE",cc.UserDefault:getInstance():getIntegerForKey("TREE")+100)
                    local num = cc.UserDefault:getInstance():getIntegerForKey("TREE")
                    self.treeLabel:setString(num)
                    end)
